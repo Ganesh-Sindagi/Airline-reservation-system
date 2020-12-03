@@ -1,0 +1,210 @@
+.table {
+    margin-bottom: 0% !important;
+}
+
+#bookings {
+    color: white;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 18px;
+    margin-left: 40px;
+    margin-top: 1px;
+}
+
+
+#bookheading {
+    font-family: 'Ubuntu', sans-serif;
+    margin-top: 4rem;
+    margin-left: 38rem;
+    color: white;
+}
+
+#nobooking {
+    positon: absolute;
+    font-family: 'Ubuntu', sans-serif;
+    margin-top: 8rem;
+    margin-left: 25rem;
+    color: white;
+}
+
+#nobp {
+    positon: absolute;
+    font-family: 'Ubuntu', sans-serif;
+    margin-left: 37rem;
+    color: white;
+    margin-bottom: 6rem;
+    font-size: 2rem;
+}
+
+.booking-card {
+    font-family: 'Ubuntu', sans-serif;
+    width: 60rem;
+    margin-top: 3rem;
+    margin-left: 17rem;
+    border-radius: 1rem;
+}
+
+.thead-cust{
+    background-color: #00adb5 !important;
+    /* background-color: #ff165d !important; */
+    color: white;
+}
+
+
+/* First row */
+#bookidh {
+    padding-left: 2rem;
+}
+
+#userh {
+    padding-left: 1.6rem;
+    padding-right: 4.2rem;
+}
+
+#flightnameh {
+    padding-right: 2rem;
+}
+
+#seatnoh {
+
+}
+
+/* First row Values  */
+
+#bookid {
+    padding-left: 2rem;
+}
+
+#username {
+    padding-left: 1.4rem;
+}
+
+#flightnamet {
+    padding-left: 2rem;
+}
+
+#seatno {
+    padding-left: 2rem;
+}
+
+
+/* Second row */
+#sourceh {
+    padding-left: 2rem !important;
+}
+
+#destinationh {
+    padding-right: 2rem;
+    padding-left: 3rem;
+}
+
+#dateh {
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+#fareh {
+    padding-right: 3rem;
+}
+
+/* Second row Values  */
+
+#sourcev {
+    padding-left: 2rem;
+}
+
+#destinationv {
+    padding-left: 4.7rem;
+}
+
+#datev {
+   
+}
+
+#farev {
+    padding-left: 1rem;
+}
+
+/* Third row */
+#depth {
+    padding-left: 2rem;
+}
+
+#arrth {
+    padding-left: 2rem;
+    padding-right: 7rem;
+}
+
+#classh {
+    padding-right: 9rem;
+}
+
+#seattypeh {
+    padding-right: 3rem;
+    padding-left: 0rem;
+}
+
+/* Third row Values  */
+
+#deptv {
+    padding-left: 2rem;
+}
+
+#arrtv {
+    padding-left: 3rem;
+}
+
+#classv {
+    padding-right: 6rem;
+}
+
+#seattypev {
+    padding-left: 0rem;
+}
+
+
+/* Fourth row */
+#ageh {
+    padding-left: 2rem;
+}
+
+#emailh {
+    padding-left: 10.5rem;
+    padding-right: 3rem;
+}
+
+#phoneh {
+    padding-left: 4.5rem;
+    padding-right: 3rem;
+}
+
+#payh {
+    padding-left: 4rem;
+}
+
+/* Fourth row Values  */
+
+#agev {
+    padding-left: 2rem;
+}
+
+#emailv {
+    padding-left: 8rem;
+}
+
+#phonev {
+    padding-left: 3.5rem;
+}
+
+#payv {
+    padding-left: 6rem;
+}
+
+
+.book-btn {
+    margin-left: 22rem;
+}
+
+
+.fa-calendar-times {
+    padding-right: 5px;
+}

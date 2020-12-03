@@ -1,0 +1,90 @@
+#bookings {
+    color: white;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 18px;
+    margin-left: 40px;
+    margin-top: 1px;
+}
+
+.seat-div {
+    margin-top: 5rem;
+    margin-left: 5rem;
+}
+
+#avseat {
+    font-family: 'Ubuntu', sans-serif;
+    color: white;
+    margin-left: 30rem;
+}
+
+.book-btn {
+    margin-left: 38rem;
+    margin-top: 3rem;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+#seatheading {
+    margin-top: 1rem;
+    padding-left: 1rem;
+    font-size: 1.5rem;
+}
+#seatno {
+    padding-left: 4rem !important;
+}
+
+#typeheading {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+}
+#type {
+    margin-left: 1rem;
+    margin-top: 10px;
+    font-size: 1.5rem;
+}
+
+#classheading {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+}
+
+
+#fareheading {
+    margin-top: 1rem;
+    margin-left: 3rem;
+    font-size: 1.5rem;
+}
+#fare {
+    margin-left: 2rem;
+    margin-top: 10px;
+    font-size: 1.5rem;
+}
+
+#checkhead {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    align-items: center;
+}
+
+.check-cust {
+    margin-left: 1.5rem;
+    margin-top: 10px;
+    font-size: 1.5rem;
+}
+
+.thead-cust {
+    background-color: #00adb5;
+    /* background-color: #ff165d !important; */
+    color: #252a34;
+}
+
+td {
+    font-size: 1.2rem;
+}
+
+#bookings {
+    color: white;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 18px;
+    margin-left: 40px;
+    margin-top: 1px;
+}

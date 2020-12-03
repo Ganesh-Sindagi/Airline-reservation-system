@@ -1,0 +1,137 @@
+/* Navbar */
+
+.navbar {
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+}
+
+#brand {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 40px;
+    color: white;
+    margin-left: 20px;
+}
+
+#home {
+    color: white;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    margin-left: 30px;
+}
+
+#about {
+    color: white;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 18px;
+    margin-left: 40px;
+}
+
+#contact {
+    color: white;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 18px;
+    margin-left: 40px;
+}
+
+#bookings {
+    color: white;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 18px;
+    margin-left: 40px;
+}
+
+.navbar-inner {
+    background: transparent;
+}
+
+#user {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 2rem;
+    color: white;
+}
+
+
+.success-card {
+    position: absolute;
+    z-index: 1;
+}
+
+.login-img {
+    position: absolute;
+    z-index: -1;
+}
+
+
+/* Backgroung Image */
+.login-img {
+    width: 100%;
+    height: 850px;
+    position: absolute;
+    z-index: 0;
+}
+
+
+/* Card Section */
+.card {
+    position: absolute;
+    width: 50rem;
+    height: 10rem;
+    margin-left: 21rem;
+    margin-top: 8.2rem;
+    border-radius: 2rem;
+    background-color: rgba(255,255,255,0.5);
+}
+
+
+
+.card-body {
+    font-family: 'Ubuntu', sans-serif;
+    color: #222831;
+    /* color: #00587a; */
+    margin-left: 5rem;
+}
+
+#successheading{
+    margin-top: 5px;;
+    font-family: 'Ubuntu', sans-serif;
+    /* color: #222831; */
+    /* color: #00587a; */
+    margin-left: 8rem;
+}
+
+
+/* Footer */
+#ganesh {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 20px;
+    padding-bottom: 20px
+}
+
+.footer {
+    position: absolute;
+    background: transparent;
+    z-index: 1;
+    margin-top: 700px;
+    color: white;
+}
+
+.footer-item {
+    padding-top: 10px;
+    margin-left: 550px;
+}
+
+.social-icon {
+    color: white;
+    margin-left: 50px;
+    font-size: 30px;
+    padding-bottom: 20px;
+}
+
+#copyright {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 16px;
+    margin-left: 80px;
+}

@@ -1,0 +1,106 @@
+#avseat {
+    margin-left: 25rem !important;
+}
+
+.flight-card {
+    border-radius: 3rem !important;
+    margin-left: 10rem !important;
+}
+
+#passhead {
+    margin-top: 10px;
+    margin-left: 20rem;
+}
+
+
+#seatlab {
+    margin-top: 2px;
+    margin-left: 8rem;
+}
+
+#seatno {
+    margin-left: 7rem;
+}
+
+#namelab {
+    margin-top: 2px;
+    margin-left: 12rem;
+}
+
+#name {
+    margin-left: 7rem;
+}
+
+#agelab {
+    margin-top: 2px;
+    margin-left: 12rem;
+}
+
+#age {
+    margin-left: 7rem;
+}
+
+#emaillab {
+    margin-top: 1rem;
+    margin-left: 12.5rem;
+}
+
+#email {
+    margin-left: 5rem;
+}
+
+#phonelab {
+    margin-top: 1rem;
+    margin-left: 12.5rem;
+}
+
+#phone {
+    margin-left: 5rem;
+}
+
+#farelab {
+    margin-top: 1.5rem;
+    margin-left: 12.5rem;
+}
+
+#faretext {
+    margin-left: 12rem;
+}
+
+#paymentlab {
+    margin-top: 1rem;
+    margin-left: 9.5rem;
+}
+
+#payment {
+    margin-left: 5rem;
+}
+
+#bookings {
+    color: white;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 18px;
+    margin-left: 40px;
+    margin-top: 1px;
+}
+
+
+.pay_row {
+    padding-right: 5rem;
+}
+
+#paymentlab2 {
+    font-family: 'Ubuntu', sans-serif;
+    margin-top: 4rem;
+    margin-left: 5.2rem;
+    color: white;
+}
+
+#farelab2 {
+    margin-top: 1.5rem;
+    margin-left: 22rem;
+}
+
+#faretext2 {
+    margin-left: 21.5rem;
+}

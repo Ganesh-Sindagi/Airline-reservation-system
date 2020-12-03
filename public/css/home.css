@@ -1,0 +1,275 @@
+/* Navbar */
+
+.navbar {
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+}
+
+#brand {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 40px;
+    color: white;
+    margin-left: 20px;
+}
+
+#home {
+    color: white;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    margin-left: 30px;
+}
+
+#about {
+    color: white;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 18px;
+    margin-left: 40px;
+}
+
+#contact {
+    color: white;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 18px;
+    margin-left: 40px;
+}
+
+.navbar-inner {
+    background: transparent;
+}
+
+
+/* Carousel */
+
+#carouselExampleSlidesOnly {
+    position: absolute;
+    z-index: -1;
+}
+
+.dest-img {
+    width: 100%;
+    height: 640px;
+}
+
+.carousel-caption{
+    margin-left: 65%;
+    margin-bottom:25%;
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 40px;
+    line-height:20px;
+    font-weight: bold;
+}
+
+.heading {
+    font-family: 'Ubuntu', sans-serif;
+    color: azure;
+    font-weight: bold;
+    position: absolute;
+    z-index: 1;
+    margin-top: 18%;
+    margin-left: 22%;
+}
+
+#heading-text {
+    font-size: 4.5rem;
+}
+
+.fa-arrow-right {
+    font-size: 18px;
+}
+
+.signup {
+    align-items: center;
+    margin-left: 40%;
+    margin-top: 2%;
+}
+
+
+/* Features */
+.features {
+    background-color: #f6f6f6;
+    position: absolute;
+    margin-top: 640px;
+    margin-bottom: 120px;
+    padding-bottom: 140px;
+    padding-top: 50px;
+}
+
+.feature-item {
+    margin-top: 80px;
+    padding-left: 7%;
+    align-items: center;
+}
+
+.fa-medal {
+    color: #0f3057;
+    font-size: 95px;
+    margin-left: 100px;
+}
+
+.fa-cocktail {
+    color: #0f3057;
+    font-size: 95px;
+    margin-left: 120px;
+}
+
+.fa-map-marked-alt {
+    color: #0f3057;
+    font-size: 95px;
+    margin-left: 90px;
+}
+
+#easy {
+    color: #0f3057;
+    margin-top: 20px;
+    margin-left: 25px;
+    font-family: 'Ubuntu', sans-serif;
+}
+#elite {
+    color: #0f3057;
+    margin-top: 20px;
+    margin-left: 1.8rem;
+    font-family: 'Ubuntu', sans-serif;
+}
+#globe {
+    color: #0f3057;
+    margin-top: 20px;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+#easy-p {
+    color: #0f3057;
+    margin-left: 60px;
+    font-family: 'Ubuntu', sans-serif;
+}
+#elite-p {
+    color: #0f3057;
+    padding-right: 55px;
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+}
+#globe-p {
+    color: #0f3057;
+    padding-right: 80px;
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+
+/* Testimonials */
+.testimonials { 
+    position: absolute;
+    margin-top: 1120px;
+    background-color: #6a2c70;
+    padding-bottom: 60px;
+    padding-top: 20px;
+  }
+  
+.testimonial-image-1 {
+    width: 70%;
+    border-radius: 20%;
+    padding-left: 80px;
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+.testimonial-image-2 {
+    width: 80%;
+    border-radius: 20%;
+    padding-left: 80px;
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+.testimonial-image-3 {
+    width: 70%;
+    border-radius: 20%;
+    padding-left: 80px;
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+#girl1 {
+    color: #f6f6f6;
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 38px;
+}
+
+#boy {
+    color: #f6f6f6;
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 38px;
+    margin-top: 5px;
+}
+
+#girl2 {
+    color: #f6f6f6;
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 38px;
+}
+
+#girl1t {
+    color: #f6f6f6;
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 20px;
+    padding: 20px;
+    width: 60%;
+    margin-left: 5rem;
+}
+
+#boyt {
+    color: #f6f6f6;
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 20px;
+    padding: 20px;
+}
+
+#girl2t {
+    color: #f6f6f6;
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 20px;
+    padding: 20px;
+    padding-left: 60px;
+    padding-right: 100px;
+}
+
+
+/* Footer Section */
+
+#ganesh {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 20px;
+    padding-bottom: 20px
+}
+
+.footer {
+    position: absolute;
+    margin-top: 1960px;
+}
+
+.footer-item {
+    padding-top: 10px;
+    margin-left: 550px;
+}
+
+.social-icon {
+    color: #000;
+    margin-left: 50px;
+    font-size: 30px;
+    padding-bottom: 20px;
+}
+
+#copyright {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 16px;
+    margin-left: 80px;
+}

@@ -1,0 +1,150 @@
+.navbar {
+    position: relative;
+}
+
+#user {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 2rem;
+    color: white;
+}
+
+
+.flights {
+    position: absolute;
+    margin-top: 6rem;
+}
+
+body {
+    background-color: #00587a !important;
+}
+
+.search-card {
+    position: absolute;
+    margin-left: 15rem;
+}
+
+#src {
+    font-size: 1.2rem;
+    margin-left: 2rem;
+    font-family: 'Ubuntu', sans-serif;
+}
+#dest {
+    font-size: 1.2rem;
+    margin-left: 2rem;
+    font-family: 'Ubuntu', sans-serif;
+}
+#dep {
+    font-size: 1.2rem;
+    margin-left: 2rem;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.form-control {
+    margin-left: 2rem;
+    margin-bottom: 10px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.search-btn {
+    position: absolute;
+    margin-left: 49rem;
+    margin-top: 2rem;
+    font-family: 'Roboto', sans-serif;
+    background-color: #fc8621;
+    color: black;
+}
+
+.search-btn:hover {
+    background-color: #db6400;
+    color: white;
+}
+
+.fa-search {
+    margin-right: 10px;
+}
+
+
+/* Flight card */
+.flight-card {
+    position: relative;
+    margin-left: 16rem;
+    margin-top: 3rem;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.flight-card-div {
+    margin-top: 20rem;
+}
+
+.book-btn {
+    background-color: #fc8621;
+    color: black;
+    margin-top: 1.6rem;
+    margin-right: 2px;
+}
+
+.book-btn:hover {
+    background-color: #db6400;
+    color: white;
+}
+
+#flightname {
+    align-items: center;
+    margin-left: 1.5rem;
+    margin-top: 1.5rem;
+    font-size: 2rem;
+}
+
+.fa-long-arrow-alt-right {
+    font-size: 2rem;
+}
+
+#fsource {
+    font-size: 2rem;
+    margin-right: 1rem;
+}
+
+#fdest {
+    font-size: 2rem;
+    margin-left: 1rem;
+}
+
+#deptime {
+    margin-left: 2rem;
+}
+
+#arrtime {
+    margin-left: 7rem;
+}
+
+#duration {
+    margin-left: 8.5rem;
+    margin-bottom: 0px;
+}
+
+#fare {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+}
+
+.fa-calendar-check {
+    margin-right: 10px;
+}
+
+
+.footer {
+    margin-top: 5rem;
+    color: white;
+}
+
+.social-icon {
+    color: white;
+}
+
+#bookings {
+    color: white;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 18px;
+    margin-left: 40px;
+    margin-top: 1px;
+}

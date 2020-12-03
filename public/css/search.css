@@ -1,0 +1,186 @@
+#user {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 2rem;
+    color: white;
+}
+
+#bookings {
+    color: white;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 18px;
+    margin-left: 40px;
+    margin-top: 1px;
+}
+
+
+.search-card {
+    position: absolute;
+    margin-top: 18rem;
+    margin-left: 15rem;
+}
+
+#src {
+    font-size: 1.2rem;
+    margin-left: 2rem;
+    font-family: 'Ubuntu', sans-serif;
+}
+#dest {
+    font-size: 1.2rem;
+    margin-left: 2rem;
+    font-family: 'Ubuntu', sans-serif;
+}
+#dep {
+    font-size: 1.2rem;
+    margin-left: 2rem;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.form-control {
+    margin-left: 2rem;
+    margin-bottom: 10px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.search-btn {
+    position: absolute;
+    margin-left: 49rem;
+    margin-top: 2rem;
+    font-family: 'Roboto', sans-serif;
+    background-color: #fc8621;
+    color: black;
+}
+
+.search-btn:hover {
+    background-color: #db6400;
+    color: white;
+}
+
+.fa-search {
+    margin-right: 10px;
+}
+
+/* Deals */
+#badgeheading {
+    margin-top: 45rem;
+    margin-left: 28rem;
+    color: #00587a;
+}
+
+.badge {
+    margin-left: 1.5rem;
+    background-color: #ea2c62;
+}
+
+.deals-container {
+    position: absolute;
+    background-color: #00587a;
+    margin-top: 5rem;
+    padding-bottom: 10rem;
+}
+
+.cust-card {
+    margin-top: 5rem;
+}
+
+
+
+/* Mumbai */
+.mumbai-card {
+    margin-top: 5rem;
+    margin-left: 10rem;
+}
+
+.card-img-top {
+    height: 210px;
+}
+
+#mumbaititle {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 1.4rem;
+}
+#mumbaiprice {
+    position: absolute;
+    font-family: 'Ubuntu', sans-serif;
+    margin-left: 4.7rem;
+    margin-top: 5px;
+}
+#mumbaidest {
+    font-family: 'Ubuntu', sans-serif;
+    margin-top: 2px;
+}
+
+
+/* Goa */
+.goa-card {
+    margin-top: 5rem;
+    margin-left:5rem;
+}
+
+#goatitle {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 1.4rem;
+}
+#goaprice {
+    margin-top: 5px;
+    position: absolute;
+    font-family: 'Ubuntu', sans-serif;
+    align-items: right;
+    margin-left: 6.8rem;
+}
+#goadest {
+    font-family: 'Ubuntu', sans-serif;
+    margin-top: 2px;
+}
+
+
+
+/* Delhi */
+.delhi-card {
+    margin-top: 5rem;
+    margin-right: 8rem;
+}
+
+#delhititle {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 1.4rem;
+}
+#delhiprice {
+    position: absolute;
+    font-family: 'Ubuntu', sans-serif;
+    margin-left: 5.7rem;
+    margin-top: 5px;
+}
+#delhidest {
+    font-family: 'Ubuntu', sans-serif;
+    margin-top: 2px;
+}
+
+
+#ganesh {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 20px;
+    padding-bottom: 20px
+}
+
+.footer {
+    position: absolute;
+    margin-top: 90rem;
+}
+
+.footer-item {
+    padding-top: 10px;
+    margin-left: 550px;
+}
+
+.social-icon {
+    color: #000;
+    margin-left: 50px;
+    font-size: 30px;
+    padding-bottom: 20px;
+}
+
+#copyright {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 16px;
+    margin-left: 80px;
+}
