@@ -224,7 +224,7 @@ app.post('/checkout', (req, res) => {
             console.log(results.rows);
             res.render('success', {user_id: passenger_id, user_name: user_name});
             const sq = "UPDATE airline.seats SET status = 'booked' WHERE seat_no = $1"
-            connection.query(sq, [seatnumbers], function (error, answers) {
+            client.query(sq, [seatnumbers], function (error, answers) {
                 if(error) throw error;
             });
         });
