@@ -223,10 +223,11 @@ app.post('/checkout', (req, res) => {
             if (error) throw error;
             console.log(results.rows);
             res.render('success', {user_id: passenger_id, user_name: user_name});
-            const sq = "UPDATE airline.seats SET status = 'booked' WHERE seat_no = $1"
-            client.query(sq, [parseInt(seatnumbers[0])], function (error, answers) {
-                if(error) throw error;
-            });
+        });
+
+        const sq = "UPDATE airline.seats SET status = 'booked' WHERE seat_no = $1"
+        client.query(sq, [parseInt(seatnumbers[0])], function (error, answers) {
+            if(error) throw error;
         });
     } else {
         for (var i = 0; i < seatnumbers.length; i++) {
