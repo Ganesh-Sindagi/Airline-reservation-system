@@ -219,14 +219,14 @@ app.post('/checkout', (req, res) => {
     seatnumbers = req.body.seatnumber.split(",");
 
     if(seatnumbers.length === 1) {
-        client.query("INSERT INTO airline.booking (passenger_id, flight_id, seat_no, name, age, email, phone, payment_type) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)", [passenger_id, flight_id, parseInt(seatnumbers[0]), name, age, email, phone, payment_type] , function (error, results) {
+        client.query("INSERT INTO airline.booking (passenger_id, flight_id, seat_no, name, age, email, phone, payment_type) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)", [passenger_id, flight_id, parseInt(seatnumbers), name, age, email, phone, payment_type] , function (error, results) {
             if (error) throw error;
             console.log(results.rows);
             res.render('success', {user_id: passenger_id, user_name: user_name});
         });
 
         const sq = "UPDATE airline.seats SET status = 'booked' WHERE seat_no = $1"
-        client.query(sq, [parseInt(seatnumbers[0])], function (error, answers) {
+        client.query(sq, [parseInt(seatnumbers)], function (error, answers) {
             if(error) throw error;
         });
     } else {
