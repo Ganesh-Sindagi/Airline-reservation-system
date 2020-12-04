@@ -215,29 +215,27 @@ app.post('/checkout', (req, res) => {
     const phone = req.body.phone;
     const payment_type = req.body.payment;
 
-    var seatnumbers = [];
-    seatnumbers = req.body.seatnumber.split(",");
-
-    if(seatnumbers.length === 1) {
-        client.query("INSERT INTO airline.booking (passenger_id, flight_id, seat_no, name, age, email, phone, payment_type) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)", [passenger_id, flight_id, parseInt(seatnumbers), name, age, email, phone, payment_type] , function (error, results) {
+    var strsn = (req.body.seatnumber).split(',');
+    console.log(strsn);
+    if(strsn.length === 1) {
+        client.query("INSERT INTO airline.booking (passenger_id, flight_id, seat_no, name, age, email, phone, payment_type) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)", [passenger_id, flight_id, parseInt(strsn[0]), name, age, email, phone, payment_type] , function (error, results) {
             if (error) throw error;
             console.log(results.rows);
             res.render('success', {user_id: passenger_id, user_name: user_name});
-        });
-
-        const sq = "UPDATE airline.seats SET status = 'booked' WHERE seat_no = $1"
-        client.query(sq, [parseInt(seatnumbers)], function (error, answers) {
-            if(error) throw error;
+            const sq = "UPDATE airline.seats SET status = 'booked' WHERE seat_no = $1"
+            client.query(sq, [parseInt(strsn[0])], function (error, answers) {
+                if(error) throw error;
+            });
         });
     } else {
-        for (var i = 0; i < seatnumbers.length; i++) {
+        for (var i = 0; i < strsn.length; i++) {
             var j = i;
-            client.query("INSERT INTO airline.booking (passenger_id, flight_id, seat_no, name, age, email, phone, payment_type) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)", [passenger_id, flight_id, parseInt(seatnumbers[i]), name[i], age[i], email[i], phone[i], payment_type] , function (error, results) {
+            client.query("INSERT INTO airline.booking (passenger_id, flight_id, seat_no, name, age, email, phone, payment_type) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)", [passenger_id, flight_id, parseInt(strsn[i]), name[i], age[i], email[i], phone[i], payment_type] , function (error, results) {
                 if (error) throw error;
                 console.log(results.rows);
             });
             const sq2 = "UPDATE airline.seats SET status = 'booked' WHERE seat_no = $1"
-            client.query(sq2, [parseInt(seatnumbers[i])], function (error, answers) {
+            client.query(sq2, [parseInt(strsn[i])], function (error, answers) {
                 if(error) throw error;
             });
         }
