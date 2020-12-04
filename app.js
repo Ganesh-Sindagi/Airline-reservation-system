@@ -218,26 +218,34 @@ app.post('/checkout', (req, res) => {
     var strsn = (req.body.seatnumber).split(',');
     console.log(strsn);
     if(strsn.length === 1) {
+        const sq = "UPDATE airline.seats SET status = 'booked' WHERE seat_no = $1"
+        client.query(sq, [parseInt(strsn[0])], function (error, answers) {
+            if(error) throw error;
+        });
+
         client.query("INSERT INTO airline.booking (passenger_id, flight_id, seat_no, name, age, email, phone, payment_type) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)", [passenger_id, flight_id, parseInt(strsn[0]), name, age, email, phone, payment_type] , function (error, results) {
-            if (error) throw error;
-            console.log(results.rows);
-            res.render('success', {user_id: passenger_id, user_name: user_name});
-            const sq = "UPDATE airline.seats SET status = 'booked' WHERE seat_no = $1"
-            client.query(sq, [parseInt(strsn[0])], function (error, answers) {
-                if(error) throw error;
-            });
+            if (error) {
+                res.render('error')
+            } else {
+                console.log(results.rows);
+                res.render('success', {user_id: passenger_id, user_name: user_name});
+            }
         });
     } else {
         for (var i = 0; i < strsn.length; i++) {
-            var j = i;
-            client.query("INSERT INTO airline.booking (passenger_id, flight_id, seat_no, name, age, email, phone, payment_type) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)", [passenger_id, flight_id, parseInt(strsn[i]), name[i], age[i], email[i], phone[i], payment_type] , function (error, results) {
-                if (error) throw error;
-                console.log(results.rows);
-            });
             const sq2 = "UPDATE airline.seats SET status = 'booked' WHERE seat_no = $1"
             client.query(sq2, [parseInt(strsn[i])], function (error, answers) {
-                if(error) throw error;
+                if(error) {
+                    res.render('error');
+                }
             });
+            client.query("INSERT INTO airline.booking (passenger_id, flight_id, seat_no, name, age, email, phone, payment_type) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)", [passenger_id, flight_id, parseInt(strsn[i]), name[i], age[i], email[i], phone[i], payment_type] , function (error, results) {
+                if (error) {
+                    res.render('error')
+                }
+                console.log(results.rows);
+            });
+            
         }
         res.render('success', {user_id: passenger_id, user_name: user_name});
     }
