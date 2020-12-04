@@ -209,7 +209,7 @@ app.post('/checkout', (req, res) => {
     const user_name = req.body.user_name;
     const passenger_id = req.body.user_id;
     const flight_id = req.body.flight_id;
-    const seatnumbers = req.body.seatnumber; //.split(",");
+    const seatnumbers = req.body.seatnumber.split(",");
     const name = req.body.name;
     const age = req.body.age;
     const email = req.body.email;
@@ -219,7 +219,7 @@ app.post('/checkout', (req, res) => {
     console.log(name, age, email, phone, payment_type);
 
     if(seatnumbers.length === 1) {
-        client.query("INSERT INTO airline.booking (passenger_id, flight_id, seat_no, name, age, email, phone, payment_type) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)", [passenger_id, flight_id, seatnumbers, name, age, email, phone, payment_type] , function (error, results, fields) {
+        client.query("INSERT INTO airline.booking (passenger_id, flight_id, seat_no, name, age, email, phone, payment_type) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)", [passenger_id, flight_id, seatnumbers, name, age, email, phone, payment_type] , function (error, results) {
             if (error) throw error;
             console.log(results.rows);
             res.render('success', {user_id: passenger_id, user_name: user_name});
