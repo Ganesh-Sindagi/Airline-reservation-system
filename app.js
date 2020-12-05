@@ -278,16 +278,23 @@ app.post('/bookings', (req, res) => {
     var user_name = req.body.user_name;
     console.log(booking_id)
 
-    const sq = "SELECT seat_no FROM airline.booking WHERE booking_id = $1"
-    client.query(sq, [booking_id], function (error, answers) {
+    client.query("SELECT flight_id FROM airline.bookings WHERE booking_id = $1", [booking_id],function (error, fn) {
         if(error) throw error;
-        console.log(answers.rows);
-        const sq2 = "UPDATE airline.seats SET status = 'available' WHERE seat_no = $1"
-        client.query(sq2, [answers.rows[0].seat_no],function (error, answers2) {
-        if(error) throw error;
-        console.log(answers2.rows);
-         });
+        var fno =  fn.rows[0].flight_id
+        const sq = "SELECT seat_no FROM airline.booking WHERE booking_id = $1"
+        client.query(sq, [booking_id], function (error, answers) {
+            if(error) throw error;
+            console.log(answers.rows);
+        
+            const sq2 = "UPDATE airline.seats SET status = 'available' WHERE seat_no = $1 AND flight_id = $2"
+            client.query(sq2, [answers.rows[0].seat_no, fno],function (error, answers2) {
+            if(error) throw error;
+            console.log(answers2.rows);
+            });
+        });
     });
+
+    
 
     const query = "DELETE FROM airline.booking WHERE booking_id = $1"
     client.query(query, [booking_id],function (error, results) {
