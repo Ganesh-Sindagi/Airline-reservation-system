@@ -293,7 +293,9 @@ app.post('/bookings', (req, res) => {
     client.query(query, [booking_id],function (error, results) {
         if (error) throw error;
         console.log(results.rows);
-        res.render('bookings', {user_id:user_id, user_name:user_name, bookings: results.rows});
+        var url = "/bookings?uid="+user_id+"&user=" + user_name
+        res.redirect(url)
+        //res.render('bookings', {user_id:user_id, user_name:user_name, bookings: results.rows});
     })
 
 })
