@@ -283,7 +283,7 @@ app.post('/bookings', (req, res) => {
         if(error) throw error;
         console.log(answers.rows);
         const sq2 = "UPDATE airline.seats SET status = 'available' WHERE seat_no = $1 AND flight_id = $2"
-        client.query(sq2, [answers.rows[0].seat_no, results.rows[0].flight_id],function (error, answers2) {
+        client.query(sq2, [answers.rows[0].seat_no, answers.rows[0].flight_id],function (error, answers2) {
         if(error) throw error;
         console.log(answers2.rows);
          });
