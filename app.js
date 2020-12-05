@@ -218,8 +218,8 @@ app.post('/checkout', (req, res) => {
     var strsn = (req.body.seatnumber).split(',');
     console.log(strsn);
     if(strsn.length === 1) {
-        const sq = "UPDATE airline.seats SET status = 'booked' WHERE seat_no = $1"
-        client.query(sq, [parseInt(strsn[0])], function (error, answers) {
+        const sq = "UPDATE airline.seats SET status = 'booked' WHERE seat_no = $1 AND flight_id = $2"
+        client.query(sq, [parseInt(strsn[0]), flight_id], function (error, answers) {
             if(error) throw error;
         });
 
@@ -233,8 +233,8 @@ app.post('/checkout', (req, res) => {
         });
     } else {
         for (var i = 0; i < strsn.length; i++) {
-            const sq2 = "UPDATE airline.seats SET status = 'booked' WHERE seat_no = $1"
-            client.query(sq2, [parseInt(strsn[i])], function (error, answers) {
+            const sq2 = "UPDATE airline.seats SET status = 'booked' WHERE seat_no = $1 AND flight_id = $2"
+            client.query(sq2, [parseInt(strsn[i]), flight_id], function (error, answers) {
                 if(error) {
                     res.render('error');
                 }
