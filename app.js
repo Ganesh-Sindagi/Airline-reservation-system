@@ -278,9 +278,10 @@ app.post('/bookings', (req, res) => {
     var user_name = req.body.user_name;
     console.log(booking_id)
 
-    client.query("SELECT flight_id FROM airline.bookings WHERE booking_id = $1", [booking_id],function (error, fn) {
+    client.query("SELECT flight_id FROM airline.booking WHERE booking_id = $1", [booking_id],function (error, fn) {
         if(error) throw error;
         var fno =  fn.rows[0].flight_id
+        
         const sq = "SELECT seat_no FROM airline.booking WHERE booking_id = $1"
         client.query(sq, [booking_id], function (error, answers) {
             if(error) throw error;
