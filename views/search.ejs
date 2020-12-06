@@ -125,8 +125,9 @@
                 </div>
                 <div class="col-md-3">
                     <label id="dep">Departure</label>
-                    <input name="date" type="date" class="form-control" placeholder="">
+                    <input name="date" type="date" class="form-control" placeholder="" data-toggle="tooltip" data-placement="top" title="Flights are available only for today">
                 </div>
+                <i class="far fa-question-circle" data-toggle="tooltip" data-placement="top" title="Flights are available only for today"></i>
                 <button type="submit" class="btn btn-lg search-btn"><i class="fas fa-search"></i>Search</button>
             </div>
             <input type="hidden" name="user_name" value="<%= user_name %>"/>

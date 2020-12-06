@@ -41,6 +41,14 @@
     font-family: 'Roboto', sans-serif;
 }
 
+/* Tooltip */
+.fa-question-circle {
+    margin-left: 2rem;
+    margin-top: 2.7rem;
+    font-size: 1.5rem;
+    color: #252a34;
+}
+
 .search-btn {
     position: absolute;
     margin-left: 49rem;
