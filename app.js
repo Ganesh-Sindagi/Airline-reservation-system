@@ -312,6 +312,23 @@ app.get("/error", (req, res) => {
 })
 
 
+// Event loop --> Set timeout <-- Web API
+
+setInterval(function(){ // Set interval for checking
+    var date = new Date(); // Create a Date object to find out what time it is
+    console.log(date.getHours())
+    var datestring = date.getFullYear()  + "-" + (date.getMonth()+1) + "-" + date.getDate()
+    if(date.getHours() >= 0 && date.getMinutes() >= 0){ // Check the time
+        query = "UPDATE airline.flights SET date = $1"
+        client.query(query, [datestring], function (error, results) {
+            if (error) throw error;
+            console.log("Flights updated")
+        })
+    }
+}, 43200000);
+
+
+
 app.listen(port, () => {
     console.log(`app listening at http://localhost:${port}`)
   })
