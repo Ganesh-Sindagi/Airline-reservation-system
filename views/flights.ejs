@@ -57,25 +57,29 @@
                     <div class="col-md-3">
                         <label id="src">Source</label>
                         <!-- <input type="text" class="form-control" placeholder=""> -->
-                        <select id="inputSource" class="form-control" name="source">
+                        <select id="inputSource" class="form-control" name="source" required>
                             <option selected><%= results[0].source %></option>
                             <option>Banglore</option>
-                            <option>Delhi</option>
+                            <option>London</option>
+                            <option>Bali</option>
                             <option>Goa</option>
+                            <option>Delhi</option>
                         </select>
                     </div>
                     <div class="col-md-3">
                         <label id="dest">Destination</label>
-                        <select id="inputDestination" class="form-control" name="destination">
+                        <select id="inputDestination" class="form-control" name="destination" required>
                             <option selected><%= results[0].destination %></option>
-                            <option>Delhi</option>
+                            <option>Bali</option>
+                            <option>London</option>
                             <option>Goa</option>
-                            <option>Los Angeles</option>
+                            <option>Banglore</option>
+                            <option>Delhi</option>
                         </select>
                     </div>
                     <div class="col-md-3">
                         <label id="dep">Departure</label>
-                        <input name="date" type="date" class="form-control" value="<%= results[0].date %>">
+                        <input name="date" type="date" class="form-control" default-value="<%= results[0].date %>" required>
                     </div>
                     <button type="submit" class="btn btn-lg search-btn"><i class="fas fa-search"></i>Search</button>
                 </div>
