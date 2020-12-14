@@ -66,6 +66,18 @@ app.get('/db', async (req, res) => {
 // Login route
 app.get("/login", (req, res) => {
     res.render('login')
+    var date = new Date(); // Create a Date object to find out what time it is
+    console.log(date.getHours())
+    var datestring = date.getFullYear()  + "-" + (date.getMonth()+1) + "-" + date.getDate()
+    if(date.getHours() >= 0 && date.getMinutes() >= 0){ // Check the time
+        query = "UPDATE airline.flights SET date = $1"
+        client.query(query, [datestring], function (error, results) {
+            if (error) {
+                console.log(error);
+            };
+            console.log("Flights updated")
+        })
+    }
 })
 
 
@@ -218,8 +230,8 @@ app.post('/checkout', (req, res) => {
     var strsn = (req.body.seatnumber).split(',');
     console.log(strsn);
     if(strsn.length === 1) {
-        const sq = "UPDATE airline.seats SET status = 'booked' WHERE seat_no = $1"
-        client.query(sq, [parseInt(strsn[0])], function (error, answers) {
+        const sq = "UPDATE airline.seats SET status = 'booked' WHERE seat_no = $1 AND flight_id = $2"
+        client.query(sq, [parseInt(strsn[0]), flight_id], function (error, answers) {
             if(error) throw error;
         });
 
@@ -233,8 +245,8 @@ app.post('/checkout', (req, res) => {
         });
     } else {
         for (var i = 0; i < strsn.length; i++) {
-            const sq2 = "UPDATE airline.seats SET status = 'booked' WHERE seat_no = $1"
-            client.query(sq2, [parseInt(strsn[i])], function (error, answers) {
+            const sq2 = "UPDATE airline.seats SET status = 'booked' WHERE seat_no = $1 AND flight_id = $2"
+            client.query(sq2, [parseInt(strsn[i]), flight_id], function (error, answers) {
                 if(error) {
                     res.render('error');
                 }
@@ -278,12 +290,12 @@ app.post('/bookings', (req, res) => {
     var user_name = req.body.user_name;
     console.log(booking_id)
 
-    const sq = "SELECT seat_no FROM airline.booking WHERE booking_id = $1"
+    const sq = "SELECT seat_no, flight_id FROM airline.booking WHERE booking_id = $1"
     client.query(sq, [booking_id], function (error, answers) {
         if(error) throw error;
         console.log(answers.rows);
-        const sq2 = "UPDATE airline.seats SET status = 'available' WHERE seat_no = $1"
-        client.query(sq2, [answers.rows[0].seat_no],function (error, answers2) {
+        const sq2 = "UPDATE airline.seats SET status = 'available' WHERE seat_no = $1 AND flight_id = $2"
+        client.query(sq2, [answers.rows[0].seat_no, answers.rows[0].flight_id],function (error, answers2) {
         if(error) throw error;
         console.log(answers2.rows);
          });
@@ -293,7 +305,9 @@ app.post('/bookings', (req, res) => {
     client.query(query, [booking_id],function (error, results) {
         if (error) throw error;
         console.log(results.rows);
-        res.render('bookings', {user_id:user_id, user_name:user_name, bookings: results.rows});
+        var url = "/bookings?uid="+user_id+"&user=" + user_name
+        res.redirect(url)
+        //res.render('bookings', {user_id:user_id, user_name:user_name, bookings: results.rows});
     })
 
 })
@@ -308,6 +322,23 @@ app.get("/checkout", (req, res) => {
 app.get("/error", (req, res) => {
     res.render('error')
 })
+
+
+// Event loop --> Set timeout <-- Web API
+
+// setInterval(function(){ // Set interval for checking
+//     var date = new Date(); // Create a Date object to find out what time it is
+//     console.log(date.getHours())
+//     var datestring = date.getFullYear()  + "-" + (date.getMonth()+1) + "-" + date.getDate()
+//     if(date.getHours() >= 0 && date.getMinutes() >= 0){ // Check the time
+//         query = "UPDATE airline.flights SET date = $1"
+//         client.query(query, [datestring], function (error, results) {
+//             if (error) throw error;
+//             console.log("Flights updated")
+//         })
+//     }
+// }, 43200000);
+
 
 
 app.listen(port, () => {

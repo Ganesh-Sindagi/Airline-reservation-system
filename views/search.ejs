@@ -103,7 +103,7 @@
                 <div class="col-md-3">
                     <label id="src">Source</label>
                     <!-- <input type="text" class="form-control" placeholder=""> -->
-                    <select id="inputSource" class="form-control" name="source">
+                    <select id="inputSource" class="form-control" name="source" required>
                         <option selected>Choose...</option>
                         <option>Banglore</option>
                         <option>London</option>
@@ -114,7 +114,7 @@
                 </div>
                 <div class="col-md-3">
                     <label id="dest">Destination</label>
-                    <select id="inputDestination" class="form-control" name="destination">
+                    <select id="inputDestination" class="form-control" name="destination" required>
                         <option selected>Choose...</option>
                         <option>Bali</option>
                         <option>London</option>
@@ -125,8 +125,9 @@
                 </div>
                 <div class="col-md-3">
                     <label id="dep">Departure</label>
-                    <input name="date" type="date" class="form-control" placeholder="">
+                    <input name="date" type="date" class="form-control" placeholder="" data-toggle="tooltip" data-placement="top" title="Flights are available only for today" required>
                 </div>
+                <i class="far fa-question-circle" data-toggle="tooltip" data-placement="top" title="Flights are available only for today"></i>
                 <button type="submit" class="btn btn-lg search-btn"><i class="fas fa-search"></i>Search</button>
             </div>
             <input type="hidden" name="user_name" value="<%= user_name %>"/>
