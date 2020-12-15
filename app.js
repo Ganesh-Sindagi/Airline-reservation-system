@@ -12,15 +12,6 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.json());
 app.use(express.static("public"));
 
-// Postgres 
-// const { Pool } = require('pg');
-// const pool = new Pool({
-//   connectionString: process.env.DATABASE_URL,
-//   ssl: {
-//     rejectUnauthorized: false
-//   }
-// });
-
 const { Client } = require('pg');
 const client = new Client({
     connectionString: process.env.DATABASE_URL,
@@ -37,6 +28,7 @@ const client = new Client({
     }
   });
 
+//Localdb
 // var connectionString = "postgres://postgres:ganesh@localhost:5432/airline";
 // const client = new Client({
 //     connectionString: connectionString
@@ -44,6 +36,410 @@ const client = new Client({
 
 client.connect()
 
+
+//* Admin Section
+app.get("/admin_login", (req, res) => {
+    res.render('admin_login')
+})
+
+app.post("/admin_login", (req, res) => {
+    console.log(req.body)
+    const username = req.body.username;
+    const password = req.body.password;
+    client.query('SELECT password,admin_id,username FROM airline.admin WHERE username = $1', [username] , function (error, results) {
+            if (!error){
+                if(password === results.rows[0].password) {
+                    console.log("Login Success!!");
+                    user_id = results.rows[0].admin_id;
+                    user_name = results.rows[0].username;
+                    console.log(user_id)
+                    res.render("admin_section", {user_name: user_name, user_id: user_id});
+                } else {
+                    res.render('error')
+                    console.log("Failure")
+                }
+            }
+      });
+})
+
+app.get("/admin_section", (req, res)=>{
+    res.render("admin_section");
+})
+
+//* Admin Flights 
+app.get('/admin_flights', (req, res)=>{
+    client.query("SELECT * FROM airline.flights",  function (error, results) {
+        if (error) {
+            res.render('error');
+        } else {
+            console.log(results.rows);
+            res.render('admin_flights', {results: results.rows});
+        }
+    });
+})
+
+app.post("/admin_flights", (req, res) => {
+    var flight_id = []
+    flight_id = req.body.selectedflight;
+    const op = req.body.op;
+    console.log(req.body)
+
+    //* Adding flights
+    switch(op) {
+        case "add":
+            res.render('add_flights')    
+            break;
+
+        case "modify":
+            console.log("Selected flights are : ",flight_id);
+            console.log(typeof(flight_id));
+            if (typeof(flight_id) == "string") {
+                client.query('SELECT * FROM airline.flights WHERE flight_id = $1', [flight_id], function (error, results) {
+                    if (error) {
+                        res.render('error')
+                        console.log(error)
+                    }
+                    else {
+                        console.log(results.rows)
+                        res.render('modify_flights', {flight_id: flight_id, results:results.rows});
+                    }
+                });
+            } else {
+                client.query('SELECT * FROM airline.flights WHERE flight_id = ANY ($1)', [flight_id], function (error, results) {
+                    if (error) {
+                        res.render('error')
+                        console.log(error)
+                    }
+                    else {
+                        console.log(results.rows)
+                        res.render('modify_flights', {flight_id: flight_id, results:results.rows});
+                    }
+                });
+            }
+            break;
+
+        case "delete":
+            if (typeof(flight_id) === "string") {
+                client.query('DELETE FROM airline.flights WHERE flight_id = $1', [flight_id], function (error, results) {
+                    if (error) {
+                        res.render('error')
+                    }
+                    else {
+                        client.query("SELECT * FROM airline.flights",  function (error, results1) {
+                            if (error) {
+                                res.render('error');
+                            } else {
+                                res.render('admin_flights', {results: results1.rows});
+                            }
+                        });
+                        console.log(`${flight_id} Delted`)
+                    }
+                });
+            } else if (typeof(flight_id) === "object") {
+                for(var i = 0; i < flight_id.length; i++) {
+                    console.log(i, "iteration")
+                    client.query('DELETE FROM airline.flights WHERE flight_id = $1', [parseInt(flight_id[i])], function (error, results) {
+                        if (error) {
+                            console.log(error);
+                            res.render('error');
+
+                        }
+                    });
+                }
+                client.query("SELECT * FROM airline.flights",  function (error, results1) {
+                    if (error) {
+                        console.log(error);
+                        res.render('error');
+                    } else {
+                        res.render('admin_flights', {results: results1.rows});
+                    }
+                });
+            }
+            break;
+    }
+
+})
+
+
+app.post("/add_flights", (req, res)=>{
+    const name = req.body.name;
+    const source = req.body.source;
+    const destination = req.body.destination;
+    const date = req.body.date;
+    const duration = req.body.duration;
+    const dep_time = req.body.dep_time;
+    const arr_time = req.body.arr_time;
+    const fare = req.body.fare;
+
+    client.query('INSERT INTO airline.flights (name, source, destination, date, duration, dep_time, arr_time, fare) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)', [name, source, destination, date, duration, dep_time, arr_time, fare], function (error, results) {
+        if (error) {
+            res.render('error')
+            console.log(error)
+        }
+        else {
+            console.log(results.rows)
+            res.render('add_flights')
+            console.log("Flight Added Successfully ")
+        }
+    });
+});
+
+app.post("/modify_flights", (req, res) => {
+    console.log("Modified body flights", req.body)
+    if((typeof(req.body.flight_id) == "string")) {
+        var flight_id = []
+        flight_id = (req.body.flight_id.split(","));
+    } else {
+        var flight_id = []
+        flight_id = (req.body.flight_id[0].split(","));
+    }
+    console.log(flight_id)
+    const name = req.body.name;
+    const source = req.body.source;
+    const destination = req.body.destination;
+
+    if((typeof(req.body.flight_id) == "string")) {
+        const date = new Date(req.body.date).toISOString();
+        var new_date = date.split("T")[0]
+    } else {
+        var new_date = [];
+        for(var i = 0; i < req.body.date.length; i++) {
+            var a_date = new Date(req.body.date[i]).toISOString();
+            new_date.push(a_date.split("T")[0]);
+        }
+    }
+
+    console.log(new_date)
+    const duration = req.body.duration;
+    const dep_time = req.body.dep_time;
+    const arr_time = req.body.arr_time;
+    const fare = req.body.fare;
+
+    if((typeof(req.body.flight_id) == "string")) {
+        client.query('UPDATE airline.flights SET name=$1, source=$2, destination=$3, date=$4, duration=$5, dep_time=$6, arr_time=$7, fare=$8 WHERE flight_id = $9', [name, source, destination, new_date, duration, dep_time, arr_time, fare, parseInt(flight_id)], function (error, results) {
+            if (error) {
+                res.render('error')
+                console.log(error)
+            }
+            else {
+                console.log("Successfully modified")
+            }
+        });
+    } else {
+        for(var i = 0; i < flight_id.length; i++) {
+            client.query('UPDATE airline.flights SET name=$1, source=$2, destination=$3, date=$4, duration=$5, dep_time=$6, arr_time=$7, fare=$8 WHERE flight_id = $9', [name[i], source[i], destination[i], new_date[i], duration[i], dep_time[i], arr_time[i], fare[i], parseInt(flight_id[i])], function (error, results) {
+                if (error) {
+                    res.render('error')
+                    console.log(error)
+                }
+                else {
+                    console.log("Successfully Modified");
+                }
+            });
+        }
+    }
+})
+
+
+
+//* Admin Seats 
+app.get('/admin_seats', (req, res)=>{
+    client.query("SELECT * FROM airline.seats ORDER BY flight_id ASC",  function (error, results) {
+        if (error) {
+            res.render('error');
+        } else {
+            console.log(results.rows);
+            res.render('admin_seats', {results: results.rows});
+        }
+    });
+})
+
+app.post("/admin_seats", (req, res) => {
+    var seat_no = []
+    seat_no = req.body.selectedseat;
+    const op = req.body.op;
+    console.log(req.body)
+
+    //* Adding Seats
+    switch(op) {
+        case "add":
+            res.render('add_seats')    
+            break;
+
+        case "modify":
+            console.log("Selected flights are : ", seat_no);
+            console.log(typeof(seat_no));
+            if (typeof(seat_no) == "string") {
+                client.query('SELECT * FROM airline.seats WHERE seat_no = $1', [parseInt(seat_no)], function (error, results) {
+                    if (error) {
+                        res.render('error')
+                        console.log(error)
+                    }
+                    else {
+                        console.log(results.rows)
+                        res.render('modify_seats', {seat_no: seat_no, results:results.rows});
+                    }
+                });
+            } else {
+                client.query('SELECT * FROM airline.seats WHERE seat_no = ANY ($1)', [seat_no], function (error, results) {
+                    if (error) {
+                        res.render('error')
+                        console.log(error)
+                    }
+                    else {
+                        console.log(results.rows)
+                        res.render('modify_seats', {seat_no: seat_no, results:results.rows});
+                    }
+                });
+            }
+            break;
+
+        case "delete":
+            if (typeof(seat_no) === "string") {
+                client.query('DELETE FROM airline.seats WHERE seat_no = $1', [seat_no], function (error, results) {
+                    if (error) {
+                        res.render('error')
+                    }
+                    else {
+                        client.query("SELECT * FROM airline.seats",  function (error, results1) {
+                            if (error) {
+                                res.render('error');
+                            } else {
+                                res.render('admin_seats', {results: results1.rows});
+                            }
+                        });
+                    }
+                });
+            } else {
+                for(var i = 0; i < seat_no.length; i++) {
+                    client.query('DELETE FROM airline.seats WHERE seat_no = $1', [parseInt(seat_no[i])], function (error, results) {
+                        if (error) {
+                            console.log(error);
+                            res.render('error');
+
+                        }
+                    });
+                }
+                client.query("SELECT * FROM airline.seats",  function (error, results1) {
+                    if (error) {
+                        console.log(error);
+                        res.render('error');
+                    } else {
+                        res.render('admin_seats', {results: results1.rows});
+                    }
+                });
+            }
+            break;
+    }
+
+})
+
+
+app.post("/add_seats", (req, res)=>{
+    console.log(req.body);
+    const seat_no = req.body.seat_no;
+    const flight_id = req.body.flight_id;
+    const seat_type = req.body.seat_type;
+    const seat_class = req.body.class;
+    const fare = req.body.fare;
+    const status = req.body.status;
+
+    client.query('INSERT INTO airline.seats (seat_no, flight_id, seat_type, class, fare, status) VALUES ($1, $2, $3, $4, $5, $6)', [seat_no, flight_id, seat_type, seat_class, fare, status], function (error, results) {
+        if (error) {
+            res.render('error')
+            console.log(error)
+        }
+        else {
+            console.log(results.rows)
+            res.render('add_seats')
+            console.log("Seat Added Successfully ")
+        }
+    });
+});
+
+app.post("/modify_seats", (req, res) => {
+    console.log("Modified body flights", req.body)
+    const seat_no = req.body.seat_no;
+    const flight_id = req.body.flight_id;
+    const seat_type = req.body.seat_type;
+    const seat_class = req.body.class;
+    const fare = req.body.fare;
+    const status = req.body.status;
+
+    if((typeof(req.body.seat_no) == "string")) {
+        client.query('UPDATE airline.seats SET seat_no=$1, flight_id=$2, seat_type=$3, class=$4, fare=$5, status=$6 WHERE seat_no = $7 AND flight_id = $8', [parseInt(seat_no), parseInt(flight_id), seat_type, seat_class, fare, status, parseInt(seat_no), parseInt(flight_id)], function (error, results) {
+            if (error) {
+                res.render('error')
+                console.log(error)
+            }
+            else {
+                console.log("Successfully modified")
+            }
+        });
+    } else {
+        for(var i = 0; i < seat_no.length; i++) {
+            client.query('UPDATE airline.seats SET seat_no=$1, flight_id=$2, seat_type=$3, class=$4, fare=$5, status=$6 WHERE seat_no = $7 AND flight_id = $8', [parseInt(seat_no[i]), parseInt(flight_id[i]), seat_type[i], seat_class[i], fare[i], status[i], parseInt(seat_no[i]), parseInt(flight_id[i])], function (error, results) {
+                if (error) {
+                    res.render('error')
+                    console.log(error)
+                }
+                else {
+                    console.log("Successfully Modified");
+                }
+            });
+        }
+    }
+})
+
+
+//* Bookings Section
+app.get("/admin_bookings", (req, res) => {
+    client.query("SELECT * FROM airline.booking",  function (error, results) {
+        if (error) {
+            res.render('error');
+        } else {
+            console.log(results.rows);
+            res.render('admin_bookings', {results: results.rows});
+        }
+    });
+})
+
+app.post("/admin_bookings", (req, res)=>{
+    const booking_id = req.body.selectedbooking;
+    if (typeof(booking_id) === "string") {
+        client.query('DELETE FROM airline.booking WHERE booking_id = $1', [booking_id], function (error, results) {
+            if (error) {
+                res.render('error')
+            }
+            else {
+                client.query("SELECT * FROM airline.booking",  function (error, results1) {
+                    if (error) {
+                        res.render('error');
+                    } else {
+                        res.render('admin_bookings', {results: results1.rows});
+                    }
+                });
+            }
+        });
+    } else {
+        for(var i = 0; i < booking_id.length; i++) {
+            client.query('DELETE FROM airline.booking WHERE booking_id = $1', [parseInt(booking_id[i])], function (error, results) {
+                if (error) {
+                    console.log(error);
+                    res.render('error');
+                }
+            });
+        }
+        client.query("SELECT * FROM airline.booking",  function (error, results1) {
+            if (error) {
+                console.log(error);
+                res.render('error');
+            } else {
+                res.render('admin_bookings', {results: results1.rows});
+            }
+        });
+    }
+})
 
 // Home route
 app.get("/", (req, res) => {
@@ -63,6 +459,7 @@ app.get('/db', async (req, res) => {
     }
   })
 
+//* User Route
 // Login route
 app.get("/login", (req, res) => {
     res.render('login')

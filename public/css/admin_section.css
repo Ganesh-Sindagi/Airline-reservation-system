@@ -1,0 +1,39 @@
+body {
+    /* background-color: #b83b5e !important; */
+    background-image: linear-gradient(to right, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%, #b12a5b 100%);
+    font-family: 'Poppins', sans-serif;
+}
+
+.logout {
+    background-color: #ea2c62;
+    margin-right: 2rem;
+}
+
+#adminhead {
+    color: white;
+    box-shadow: 20;
+    margin-top: 4rem;
+    margin-left: 35rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.card {
+    margin: 3rem 2rem;
+    object-fit: scale-down;
+    border-radius: 7%;
+    overflow: hidden;
+}
+
+.flight-img {
+    height: 11.8rem;
+}
+
+.go-btn {
+    background-color: #ff2e63;
+    color: white;
+}
+
+.go-btn:hover {
+    background-color: #ea2c62;
+    color: white;
+}
