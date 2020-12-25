@@ -14,14 +14,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Ubuntu:wght@700&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="\css\home.css">
-  <link rel="stylesheet" href="\css\flights.css">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="\css\admin_bookings.css">
+  <link rel="stylesheet" href="\css\about.css">
 </head>
 
 <body>
+
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
         <a class="navbar-brand" id="brand" href="/">flyEasy</a>
@@ -32,7 +31,7 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item active">
-              <a class="nav-link" href="/admin_section" id="home">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/" id="home">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/about" id="about">About</a>
@@ -41,53 +40,41 @@
               <a class="nav-link" href="/contact" id="contact">Contact</a>
             </li>
           </ul>
-          <a href="/"><button class="btn btn-danger logout">Logout</button></a>
         </div>
     </nav>
 
-    <!-- Section Selection -->
-    <h1 id="flighthead">Bookings</h1> 
 
-    <form action="/admin_bookings" method="post">
-        <div class="col-md-12 card">
-            <div class="card-body">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Passenger ID</th>
-                        <th scope="col">Flight ID</th>
-                        <th scope="col">Seat NO</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Age</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Phone</th>
-                        <th scope="col">Payment Type</th>
-                        <th scope="col">Select</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <% for(var i = 0; i < results.length; i++) { %>
-                            <tr>
-                                <th scope="row"><%= results[i].booking_id %></th>
-                                <td><%= results[i].passenger_id %></td>
-                                <td><%= results[i].flight_id %></td>
-                                <td><%= results[i].seat_no %></td>
-                                <td><%= results[i].name %></td>
-                                <td><%= results[i].age %></td>
-                                <td><%= results[i].email %></td>
-                                <td><%= results[i].phone %></td>
-                                <td><%= results[i].payment_type %></td>
-                                <td><input name="selectedbooking" style="margin-left:1rem" type="checkbox" value="<%= results[i].booking_id %>"/></td>
-                            </tr>
-                        <% } %> 
-                    </tbody>
-                </table>
-                <button name="op" type="submit" class="btn go-btn delete-btn" value="delete" onClick="alert('Booking Deleted Successfully!')">Delete</button>
-                <a href="/admin_section"><button type="button" class="btn btn-warning">Back</button></a>
-            </div>
+    <!-- About Section -->
+    <div class="row">
+      <div class="col-md-5 card flycard">
+        <div class="card-body">
+          <h1>About flyEasy</h1> 
+          <h4 class="flyh">All your travel needs sorted: <br>Book flights on flyEasy</h4>
+          <p class="flyp">flyEasy is India’s latest online travel portal that simplifies all your trips. Intelligent, travel platform that helps in organising, booking and tracking all your trips. We aggregate information from all over the web to bring you the best offers and deals. With flyEasy, you can bank upon us to plan your travel better! Our trip planner can help find the best travel itinerary for you.</p>
         </div>
-    </form>
+      </div>
+      <div class="col-md-5 card devcard">
+        <div class="card-body">
+          <h1>About Developer</h1> 
+          <div class="row">
+            <div class="col-md-6">
+              <img class="card-img g-img" src="images/admin/ganesh-2.jpg">
+            </div>
+            <div class="col-md-6 dev-head">
+              Ganesh Sindagi<br>
+              <a href="https://www.instagram.com/ganesh_sindagi/" style="color: black;"><p class="dev-pg">follow @ganesh_sindagi</p></a>
+            </div>
+            <div class="hob">
+              <p>Hobbies: Playing Cricket, Swimming, Gaming</p>
+              <p>Personal intrests: Travelling, Bike Riding</p>
+              <p>Profession: Skilled Programmer</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
 
     <!-- Footer -->
     <footer class="footer">
@@ -100,5 +87,10 @@
         <p id="copyright">© Copyright 2020 flyEasy</p>
         </div>
     </footer>
+
+    <!-- jQuery and JS bundle w/ Popper.js -->
+    <script src="https://kit.fontawesome.com/b6a0edf9cb.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 </body>
 </html> 

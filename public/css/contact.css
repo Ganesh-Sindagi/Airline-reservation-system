@@ -1,0 +1,57 @@
+.card {
+    width: 50rem;
+    margin-left: 23rem;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+    border-radius: 2rem;
+    box-shadow: 10px 10px 10px rgb(175, 168, 168);
+    background-color: #a9294f;
+    color: white;
+}
+
+h1{
+    text-align: center;
+    /* color: #252a34; */
+}
+
+a {
+    /* color: #252a34; */
+    color: white;
+}
+
+a:hover {
+    color: white;
+}
+
+#ao {
+    margin-top: 2rem;
+    margin-left: 3rem;
+    /* color: #212121; */
+}
+
+#em {
+    margin-left: 3rem;
+    /* color: #212121; */
+}
+
+#mh {
+    margin-top: 2rem;
+    margin-left: 3rem;
+    /* color: #212121; */
+}
+
+.name-in {
+    margin-top: 1rem;
+    margin-left: 3rem;
+}   
+
+.mess-in {
+    margin-top: 1.5rem;
+    margin-left: 3rem;
+}
+
+.btn-info {
+    margin-bottom: 1rem;
+    margin-top: 1.5rem;
+    margin-left: 3rem;
+}

@@ -22,6 +22,12 @@ body {
     object-fit: scale-down;
     border-radius: 7%;
     overflow: hidden;
+    box-shadow: 10px 10px 10px rgb(211, 87, 87);
+    transition-delay: 100ms;
+}
+
+.card:hover{
+    transform: translateY(-5%); 
 }
 
 .flight-img {

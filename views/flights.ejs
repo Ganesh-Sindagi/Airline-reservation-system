@@ -33,13 +33,16 @@
               <a class="nav-link" href="/" id="home">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" id="about">About</a>
+              <a class="nav-link" href="/about" id="about">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" id="contact">Contact</a>
+              <a class="nav-link" href="/contact" id="contact">Contact</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/bookings?uid=<%= user_id %>&user=<%= user_name %>" id="bookings">Bookings</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/" id="home" style="margin-top: 1px;">LogOut</a>
             </li>
           </ul>
           <h5 id="user"><%= user_name %></h5>
@@ -99,18 +102,22 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-3">
-                                <h5 id="flightname"><%= results[i].name %></h5>
+                                <h5 id="flightname" data-toggle="tooltip" data-placement="top" title="Flight Name"><%= results[i].name %></h5>
                             </div>
                             <div class="col-md-5">
-                                <p id="duration"><%= results[i].duration %></p>
-                                <nobr id="fsource"><%= results[i].source %></nobr> 
-                                <nobr><i class="fas fa-long-arrow-alt-right"></i></nobr>
-                                <nobr id="fdest"><%= results[i].destination %></nobr>
-                                <nobr id="deptime"><%= results[i].dep_time %></nobr>
-                                <nobr id="arrtime"><%= results[i].arr_time %></nobr>
+                                <p id="duration" data-toggle="tooltip" data-placement="top" title="Duration"><%= results[i].duration %></p>
+                                <% if(results[i].source === "Goa" || results[i].source === "Bali") { %>
+                                    <nobr id="fsource" style="margin-left: 2rem;" data-toggle="tooltip" data-placement="top" title="Source"><%= results[i].source %></nobr>
+                                <% }else { %>
+                                <nobr id="fsource" data-toggle="tooltip" data-placement="top" title="Source"><%= results[i].source %></nobr>
+                                <% } %>
+                                <nobr><i class="fas fa-long-arrow-alt-right" data-toggle="tooltip" data-placement="top" title="To"></i></nobr>
+                                <nobr id="fdest" data-toggle="tooltip" data-placement="top" title="Destination"><%= results[i].destination %></nobr>
+                                <p id="deptime" data-toggle="tooltip" data-placement="top" title="Departure Time"><%= results[i].dep_time %><nobr id="arrtime" data-toggle="tooltip" data-placement="top" title="Arrival Time"><%= results[i].arr_time %></nobr></p>
+                                
                             </div>
                             <div class="col-md-2">
-                                <p id="fare"><i class="fas fa-rupee-sign"></i> <%= results[i].fare %></p>
+                                <p id="fare" data-toggle="tooltip" data-placement="top" title="Fare"><i class="fas fa-rupee-sign"></i> <%= results[i].fare %></p>
                             </div>
                             <div class="col-md-2">
                                 <button name="bookbtn" value="<%= results[i].flight_id %>" type="submit" class="btn btn-lg book-btn"><i class="far fa-calendar-check"></i> Book</button>

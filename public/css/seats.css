@@ -24,6 +24,7 @@
 }
 
 #seatheading {
+    color: white;
     margin-top: 1rem;
     padding-left: 1rem;
     font-size: 1.5rem;
@@ -33,6 +34,7 @@
 }
 
 #typeheading {
+    color: white;
     margin-top: 1rem;
     font-size: 1.5rem;
 }
@@ -43,12 +45,14 @@
 }
 
 #classheading {
+    color: white;
     margin-top: 1rem;
     font-size: 1.5rem;
 }
 
 
 #fareheading {
+    color: white;
     margin-top: 1rem;
     margin-left: 3rem;
     font-size: 1.5rem;
@@ -60,6 +64,7 @@
 }
 
 #checkhead {
+    color: white;
     margin-top: 1rem;
     font-size: 1.5rem;
     align-items: center;

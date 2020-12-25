@@ -5,6 +5,9 @@ const cors = require("cors");
 const app = express()
 const port = process.env.PORT || 5000
 
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 app.set('view engine', 'ejs');
 
 app.use(cors());
@@ -42,24 +45,27 @@ app.get("/admin_login", (req, res) => {
     res.render('admin_login')
 })
 
+
 app.post("/admin_login", (req, res) => {
     console.log(req.body)
     const username = req.body.username;
     const password = req.body.password;
     client.query('SELECT password,admin_id,username FROM airline.admin WHERE username = $1', [username] , function (error, results) {
-            if (!error){
-                if(password === results.rows[0].password) {
+        if (!error){
+            bcrypt.compare(password, results.rows[0].password, function(err, hashResult) {
+                if(hashResult == true) {
                     console.log("Login Success!!");
                     user_id = results.rows[0].admin_id;
                     user_name = results.rows[0].username;
                     console.log(user_id)
                     res.render("admin_section", {user_name: user_name, user_id: user_id});
                 } else {
-                    res.render('error')
+                    res.send("Invalid Username or Password");
                     console.log("Failure")
                 }
-            }
-      });
+            });
+        }
+    });
 })
 
 app.get("/admin_section", (req, res)=>{
@@ -295,41 +301,43 @@ app.post("/admin_seats", (req, res) => {
             break;
 
         case "delete":
-            if (typeof(seat_no) === "string") {
-                client.query('DELETE FROM airline.seats WHERE seat_no = $1', [seat_no], function (error, results) {
-                    if (error) {
-                        res.render('error')
-                    }
-                    else {
-                        client.query("SELECT * FROM airline.seats",  function (error, results1) {
+            if(seat_no) {
+                if (typeof(seat_no) === "string") {
+                    client.query('DELETE FROM airline.seats WHERE seat_no = $1', [seat_no], function (error, results) {
+                        if (error) {
+                            res.render('error')
+                        }
+                        else {
+                            client.query("SELECT * FROM airline.seats",  function (error, results1) {
+                                if (error) {
+                                    res.render('error');
+                                } else {
+                                    res.render('admin_seats', {results: results1.rows});
+                                }
+                            });
+                        }
+                    });
+                } else {
+                    for(var i = 0; i < seat_no.length; i++) {
+                        client.query('DELETE FROM airline.seats WHERE seat_no = $1', [parseInt(seat_no[i])], function (error, results) {
                             if (error) {
+                                console.log(error);
                                 res.render('error');
-                            } else {
-                                res.render('admin_seats', {results: results1.rows});
+    
                             }
                         });
                     }
-                });
-            } else {
-                for(var i = 0; i < seat_no.length; i++) {
-                    client.query('DELETE FROM airline.seats WHERE seat_no = $1', [parseInt(seat_no[i])], function (error, results) {
+                    client.query("SELECT * FROM airline.seats",  function (error, results1) {
                         if (error) {
                             console.log(error);
                             res.render('error');
-
+                        } else {
+                            res.render('admin_seats', {results: results1.rows});
                         }
                     });
                 }
-                client.query("SELECT * FROM airline.seats",  function (error, results1) {
-                    if (error) {
-                        console.log(error);
-                        res.render('error');
-                    } else {
-                        res.render('admin_seats', {results: results1.rows});
-                    }
-                });
+                break;
             }
-            break;
     }
 
 })
@@ -483,20 +491,21 @@ app.post("/login", (req, res) => {
     const password = req.body.password;
 
     client.query('SELECT password,user_id,username FROM airline.user WHERE email = $1', [username], function (error, results) {
-            console.log(results.rows)
-            if (!error){
-                if(password === results.rows[0].password) {
+        if (!error){
+            bcrypt.compare(password, results.rows[0].password, function(err, hashResult) {
+                if(hashResult == true) {
                     console.log("Login Success!!");
                     user_id = results.rows[0].user_id;
                     user_name = results.rows[0].username;
                     console.log(user_id)
-                    res.render("search", {user_name: user_name, user_id: user_id});
+                    res.render("search", {user_name: user_name, user_id: user_id}); 
                 } else {
-                    res.render('error')
+                    res.send("Invalid Username or Password");
                     console.log("Failure")
                 }
-            }
-      });
+            });
+        }
+    });
 })
 
 
@@ -507,11 +516,13 @@ app.get("/signup", (req, res) => {
 
 app.post("/signup", (req, res) => {
     const username = req.body.username;
-    const password = req.body.password;
+    const plainPassword = req.body.password;
     const email = req.body.email;
-
-    client.query('INSERT INTO airline.user (username, password, email) VALUES ($1, $2, $3)', [username, password, email], function (error, results) {
+    bcrypt.hash(plainPassword, saltRounds, function(err, hash) {
+        // Store hash in your password DB.
+        client.query('INSERT INTO airline.user (username, password, email) VALUES ($1, $2, $3)', [username, hash, email], function (error, results) {
             if (error) {
+                console.log(error);
                 res.render('error')
             }
             else {
@@ -519,6 +530,7 @@ app.post("/signup", (req, res) => {
                 console.log("SignUp Success")
             }
       });
+    });
 })
 
 
@@ -534,10 +546,15 @@ app.post("/search", (req, res) => {
     var user_name = req.body.user_name;
     var user_id = req.body.user_id;
 
+    if(source === destination) {
+        res.send("<h1 style='text-align: center; font-size:3rem; margin-top:2rem;'>You have Selected Same source and destination!!!.<br>Please Change it<h1><br><br><h3 style='align-items:center; margin-left:8rem; font-size: 2rem;'>Note: If you get a message like Internal Server Error then you would have entered a wrong date..")
+    }
+
     console.log(req.body);
     console.log(user_name);
     client.query("SELECT * FROM airline.flights WHERE source = $1 AND destination = $2 AND date = $3", [source, destination, date],  function (error, results) {
-        if (error) {
+        if (results.rows == 0) {
+            res.send("<h1 style='text-align: center; font-size:3rem; margin-top:2rem;'>You have Selected Same source and destination!!!.<br>Please Change it<h1><br><br><h3 style='align-items:center; margin-left:8rem; font-size: 2rem;'>Note: If you get a message like Internal Server Error then you would have entered a wrong date..")
             res.render('error');
         } else {
             console.log(results.rows);
@@ -720,6 +737,15 @@ app.get("/error", (req, res) => {
     res.render('error')
 })
 
+//about route
+app.get("/about", (req, res) => {
+    res.render('about')
+})
+
+//Contact route
+app.get("/contact", (req, res) => {
+    res.render('contact')
+})
 
 // Event loop --> Set timeout <-- Web API
 

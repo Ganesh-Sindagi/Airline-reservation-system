@@ -91,7 +91,7 @@ body {
 #flightname {
     align-items: center;
     margin-left: 1.5rem;
-    margin-top: 1.5rem;
+    margin-top: 1.8rem;
     font-size: 2rem;
 }
 
@@ -106,7 +106,7 @@ body {
 
 #fdest {
     font-size: 2rem;
-    margin-left: 1rem;
+    margin-left: 1.5rem;
 }
 
 #deptime {

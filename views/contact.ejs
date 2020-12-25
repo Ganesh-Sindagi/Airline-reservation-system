@@ -14,14 +14,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Ubuntu:wght@700&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="\css\home.css">
-  <link rel="stylesheet" href="\css\flights.css">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="\css\admin_bookings.css">
+  <link rel="stylesheet" href="\css\about.css">
+  <link rel="stylesheet" href="\css\contact.css">
 </head>
 
 <body>
+
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
         <a class="navbar-brand" id="brand" href="/">flyEasy</a>
@@ -32,62 +32,45 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item active">
-              <a class="nav-link" href="/admin_section" id="home">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/" id="home">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/about" id="about">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/contact" id="contact">Contact</a>
+              <a class="nav-link" href="#" id="contact">Contact</a>
             </li>
           </ul>
-          <a href="/"><button class="btn btn-danger logout">Logout</button></a>
         </div>
     </nav>
 
-    <!-- Section Selection -->
-    <h1 id="flighthead">Bookings</h1> 
 
-    <form action="/admin_bookings" method="post">
-        <div class="col-md-12 card">
-            <div class="card-body">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Passenger ID</th>
-                        <th scope="col">Flight ID</th>
-                        <th scope="col">Seat NO</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Age</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Phone</th>
-                        <th scope="col">Payment Type</th>
-                        <th scope="col">Select</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <% for(var i = 0; i < results.length; i++) { %>
-                            <tr>
-                                <th scope="row"><%= results[i].booking_id %></th>
-                                <td><%= results[i].passenger_id %></td>
-                                <td><%= results[i].flight_id %></td>
-                                <td><%= results[i].seat_no %></td>
-                                <td><%= results[i].name %></td>
-                                <td><%= results[i].age %></td>
-                                <td><%= results[i].email %></td>
-                                <td><%= results[i].phone %></td>
-                                <td><%= results[i].payment_type %></td>
-                                <td><input name="selectedbooking" style="margin-left:1rem" type="checkbox" value="<%= results[i].booking_id %>"/></td>
-                            </tr>
-                        <% } %> 
-                    </tbody>
-                </table>
-                <button name="op" type="submit" class="btn go-btn delete-btn" value="delete" onClick="alert('Booking Deleted Successfully!')">Delete</button>
-                <a href="/admin_section"><button type="button" class="btn btn-warning">Back</button></a>
-            </div>
+    <!-- Contact Section -->
+    <div class="card">
+        <div class="card-body">
+          <h1>Contact Details</h1>
+          <p id="ao">App Owner: Ganesh Sindagi</p>
+          <p id="em">Email: <a href = "mailto:ganeshsindagi7@gmail.com">ganeshsindagi7@gmail.com</a></p>
+          <h5 id="mh">You can send your message or feedback to the developer</h5>
+
+          <form>
+              <div class="row">
+                <div class="col-md-5">
+                    <input type="text" class="form-control name-in" placeholder="Name">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-8">
+                    <textarea type="text" class="form-control mess-in" rows="5"  placeholder="Message"></textarea>
+                </div>
+              </div>
+              <a href="/contact"><button class="btn btn-info" type="button" onClick="alert('Feeback Submitted!!')">Submit</button></a>
+          </form>
         </div>
-    </form>
+      </div>
+
+    
 
     <!-- Footer -->
     <footer class="footer">
