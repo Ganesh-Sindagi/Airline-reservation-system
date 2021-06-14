@@ -1,5 +1,7 @@
 /* Navbar */
-
+html {
+    scroll-behavior: smooth;
+  }
 .navbar {
     width: 100%;
     position: absolute;
@@ -87,6 +89,50 @@
     margin-top: 2%;
 }
 
+/* flybot section */
+.flybot-card {
+    position: absolute;
+    margin-top: 66rem;
+    width: 80rem;
+    margin-left: 7rem;
+    z-index: 1;
+    box-shadow: 10px 10px 10px rgb(153, 158, 158);
+    background-color: #00b8a9;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.fly-bot {
+    /* position: absolute; */
+    /* margin-top: 119rem; */
+    /* z-index: 1; */
+    padding: 2rem;
+}
+
+#lone {
+    font-size: 3rem;
+    margin-left: 2rem;
+}
+
+#ltwo {
+    font-size: 4rem;
+    margin-left: 2rem;
+}
+
+#lthree {
+    margin-top: 20px;
+    margin-left: 2rem;
+    font-size: 1.8rem;
+}
+
+.flybot-img {
+    width: 16rem;
+    height: 16rem;
+    margin-left: 4rem;
+    opacity: 90%;
+    border-radius: 50%;
+}
+
 
 /* Features */
 .features {
@@ -94,8 +140,8 @@
     position: absolute;
     margin-top: 640px;
     margin-bottom: 120px;
-    padding-bottom: 140px;
-    padding-top: 50px;
+    padding-bottom: 34rem;
+    padding-top: 20px;
 }
 
 .feature-item {
@@ -162,9 +208,9 @@
 /* Testimonials */
 .testimonials { 
     position: absolute;
-    margin-top: 1120px;
+    margin-top: 1500px;
     background-color: #6a2c70;
-    padding-bottom: 60px;
+    padding-bottom: 40px;
     padding-top: 20px;
   }
   
@@ -252,9 +298,13 @@
     padding-bottom: 20px
 }
 
+.fth {
+    margin-top: 70px;
+}
+
 .footer {
     position: absolute;
-    margin-top: 1960px;
+    margin-top: 2220px;
 }
 
 .footer-item {

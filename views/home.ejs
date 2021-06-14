@@ -12,6 +12,10 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto&family=Ubuntu:wght@700&display=swap" rel="stylesheet">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
   <link rel="stylesheet" href="\css\home.css">
   
 </head>
@@ -20,7 +24,7 @@
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
-        <a class="navbar-brand" id="brand" href="#">flyEasy</a>
+        <a class="navbar-brand" class="animate__animated animate__tada" id="brand" href="#">flyEasy</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -36,6 +40,9 @@
             <li class="nav-item">
               <a class="nav-link" href="/contact" id="contact">Contact</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/flybot" id="contact">flyBot</a>
+              </li>
           </ul>
           <form class="form-inline my-2 my-lg-0">
             <a href="/login"><button class="btn btn-success my-2 my-sm-0" type="button">Login</button></a>
@@ -142,10 +149,25 @@
     </div>
 
       
+    <!-- flybot section   -->
+    <div class="card flybot-card">
+        <div class="row fly-bot mx-auto">
+            <div class="col-md-8">
+                <h1 id="lone">Introducing Most Unique Feature</h1>
+                <h1 id="ltwo"><em>flyBot</em></h1>
+                <h2 id="lthree">Voice assisted auto booking engine which will book flights on behalf of you!</h2>
+            </div>
+            <div class="col-md-2">
+                <img src="images/flybot/flybot-img.jpg" class="flybot-img">
+            </div>
+        </div>
+    </div>
+    
+
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer fth">
         <div class="container footer-item">
-        <h1 id="ganesh">Developed with 🤍 by Ganesh Sindagi</h1>
+        <h1 id="ganesh" class="fth">Developed with 🤍 by Ganesh Sindagi</h1>
         <a href="https://www.facebook.com/ganesh.sindagi.3"><i class="social-icon fab fa-facebook-f"></i></a>
         <a href="https://twitter.com/GaneshSindagi"><i class="social-icon fab fa-twitter"></i></a>
         <a href="https://www.instagram.com/ganesh_sindagi/"><i class="social-icon fab fa-instagram"></i></a>
@@ -155,7 +177,7 @@
     </footer>
 
     <script>$('.carousel').carousel({
-        // interval: 1000
+        interval: 100
       })</script>  
     <!-- jQuery and JS bundle w/ Popper.js -->
     <script src="https://kit.fontawesome.com/b6a0edf9cb.js" crossorigin="anonymous"></script>

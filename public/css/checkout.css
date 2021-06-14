@@ -3,8 +3,9 @@
 }
 
 .flight-card {
-    border-radius: 2rem !important;
+    border-radius: 1rem !important;
     margin-left: 11rem !important;
+    box-shadow: 15px 15px 15px rgb(3, 62, 80);
 }
 
 #passhead {
@@ -103,4 +104,52 @@
 
 #faretext2 {
     margin-left: 21.5rem;
+}
+
+.pay-card {
+    width: 60rem;
+    margin-top: 5rem;
+    margin-left: 11rem;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 15px 15px 15px rgb(3, 62, 80);
+}
+
+.month-credit {
+    margin-top: 1rem;
+}
+
+.exp-label {
+    margin-left: 12rem;
+}
+
+.cvv-label {
+    margin-left: 10rem;
+}
+
+.month-select {
+    margin-top: 10px;
+    margin-left: 7rem;
+}
+
+.year-select {
+    margin-top: 10px;
+    margin-left: 6rem;
+}
+
+.cvv-inp {
+    margin-top: 10px;
+    margin-left: 15rem !important;
+}
+
+.upi-form {
+    margin-top: 30px;
+}
+
+.input-group-text {
+    margin-left:2rem;
+}
+
+.form-check {
+    margin-left: 1rem;
 }

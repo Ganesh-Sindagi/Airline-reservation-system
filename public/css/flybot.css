@@ -1,0 +1,48 @@
+body {
+    background-color: #218F76 !important;
+}
+
+.fly-img {
+    position: absolute;
+    width: 50rem;
+    height: 53rem;
+    margin-left: 44.95rem;
+    opacity: 85%;
+}
+
+nav {
+    /* position: relative; */
+}
+
+#fline {
+    margin-top: 4rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    font-size: 3.5rem;
+    color: #fafafa;
+}
+
+#sline {
+    margin-top: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    font-size: 2.5rem;
+    color: #fafafa;
+}
+
+#tline {
+    margin-top: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    font-size: 4rem;
+    color: #f5f5f5;
+}
+
+#frline {
+    margin-top: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    font-size: 2rem;
+    margin-bottom:  2rem;
+    color: #fafafa;
+}

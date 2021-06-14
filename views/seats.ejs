@@ -71,10 +71,10 @@
                           <% for(var i=0; i < results.length; i++) { %>
                             <tr>
                               <th scope="row" id="seatno"><%= results[i].seat_no %></th>
-                              <td><%= results[i].seat_type %></td>
+                              <td id="type" value="<%= results[i].seat_type %>"><%= results[i].seat_type %></td>
                               <td><%= results[i].class %></td>
                               <td><i class="fas fa-rupee-sign"></i> <%= results[i].fare %></td>
-                              <td><input name="selectedseat" class="form-check-input check-cust" type="checkbox" value="<%= results[i].seat_no %>"/></td>
+                              <td><input name="selectedseat" class="form-check-input check-cust" type="checkbox" value="<%= results[i].seat_no %>" id="<%= results[i].seat_no %>"/></td>
                             </tr>
                           <% } %>
                         </tbody>

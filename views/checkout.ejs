@@ -69,22 +69,22 @@
                             </div>
                             <div class="col-md-3">
                                 <label id="namelab" for="name">Name</label>
-                                <input name="name" type="text" class="form-control" placeholder="" id="name">
+                                <input name="name" type="text" class="form-control" placeholder="" id="name" required>
                             </div>
                             <div class="col-md-3">
                                 <label id="agelab" for="age">Age</label>
-                                <input name="age" type="text" class="form-control" placeholder="" id="age">
+                                <input name="age" type="text" class="form-control" placeholder="" id="age" required>
                             </div>
                         </div>
     
                         <div class="row">
                             <div class="offset-md-1 col-md-4">
                                 <label id="emaillab" for="email">Email</label>
-                                <input name="email" id="email" type="email" class="form-control" aria-describedby="emailHelp">
+                                <input name="email" id="email" type="email" class="form-control" aria-describedby="emailHelp" required>
                             </div>
                             <div class="col-md-4">
                                 <label id="phonelab" for="phone">Phone</label>
-                                <input name="phone" type="text" class="form-control" placeholder="" id="phone">
+                                <input name="phone" type="tel" class="form-control" placeholder="" id="phone" required>
                             </div>
                         </div>
     
@@ -92,10 +92,11 @@
                             <div class="offset-md-1 col-md-4">
                                 <label id="farelab">Fare</label>
                                 <p id="faretext"><i class="fas fa-rupee-sign"></i> <%= fare %></p>
+                                <input type= "hidden" name="act_fare" value="<%= fare %>">
                             </div>
                             <div class="col-md-4">
                                 <label id="paymentlab">Payment Method</label>
-                                <select id="payment" class="form-control" name="payment">
+                                <select id="payment" class="form-control" name="payment" required>
                                     <option selected>Choose...</option>
                                     <option>Credit Card</option>
                                     <option>Debit Card</option>
@@ -119,29 +120,30 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label id="namelab" for="name">Name</label>
-                                    <input name="name" type="text" class="form-control" placeholder="" id="name">
+                                    <input name="name" type="text" class="form-control" placeholder="" id="name" required>
                                 </div>
                                 <div class="col-md-3">
                                     <label id="agelab" for="age">Age</label>
-                                    <input name="age" type="text" class="form-control" placeholder="" id="age">
+                                    <input name="age" type="text" class="form-control" placeholder="" id="age" required>
                                 </div>
                             </div>
         
                             <div class="row">
                                 <div class="offset-md-1 col-md-4">
                                     <label id="emaillab" for="email">Email</label>
-                                    <input name="email" id="email" type="email" class="form-control" aria-describedby="emailHelp">
+                                    <input name="email" id="email" type="email" class="form-control" aria-describedby="emailHelp" required>
                                 </div>
                                 <div class="col-md-4">
                                     <label id="phonelab" for="phone">Phone</label>
-                                    <input name="phone" type="text" class="form-control" placeholder="" id="phone">
+                                    <input name="phone" type="tel" class="form-control" placeholder="" id="phone" required>
                                 </div>
                             </div>
         
                             <div class="row">
                                 <div class="offset-md-1 col-md-12">
                                     <label id="farelab2">Fare</label>
-                                    <p id="faretext2"><i class="fas fa-rupee-sign"></i> <%= fare[i] %></p>
+                                    <p id="faretext2"><i class="fas fa-rupee-sign"></i><%= fare[i] %></p>
+                                    <input type= "hidden" name="act_fare" value="<%= fare[i] %>">
                                 </div>
                             </div>
                         </div>
@@ -154,7 +156,7 @@
             <div class="row">
                 <div class="offset-md-4 col-md-2 pay-row">
                     <label id="paymentlab2">Payment Method</label>
-                    <select id="payment" class="form-control" name="payment">
+                    <select id="payment" class="form-control" name="payment" required>
                         <option selected>Choose...</option>
                         <option>Credit Card</option>
                         <option>Debit Card</option>
@@ -164,6 +166,166 @@
             </div>
             <% } %>
             
+            <!-- Payment Options -->
+            <div class="card pay-card">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Credit Card</a>
+                    <a class="nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Debit Card</a>
+                    <a class="nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Paytm</a>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <p style="margin-top: 10px;">Enter your Credit card credentials to complete the booking</p>
+                            <div class="row">
+                              <div class="col-md-5" style="margin-left: 2.5rem;">
+                                <input type="text" class="form-control" placeholder="Name on card">
+                              </div>
+                              <div class="col-md-5">
+                                <input type="text" class="form-control" placeholder="Credit Card number">
+                              </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col">
+                                    <label class="form-label month-credit exp-label">Expiry Date: </label>
+                                </div>
+                                <div class="col">
+                                    <label class="form-label month-credit cvv-label">CVV: </label>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <select class="custom-select mr-sm-2 month-select" id="inlineFormCustomSelect">
+                                        <option selected>Month</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                      </select>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <select class="custom-select mr-sm-2 month-credit year-select" id="inlineFormCustomSelect">
+                                        <option selected>Year</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2025">2025</option>
+                                        <option value="2026">2026</option>
+                                        <option value="2027">2027</option>
+                                        <option value="2028">2028</option>
+                                        <option value="2029">2029</option>
+                                        <option value="2030">2030</option>
+                                        <option value="2031">2031</option>
+                                        <option value="2032">2032</option>
+                                      </select>
+                                </div>
+
+                                <div class="col-md-2 cvv-inp">
+                                    <input type="text" class="form-control" placeholder="CVV">
+                                </div>
+                            </div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <p style="margin-top: 10px;">Enter your Debit card credentials to complete the booking</p>
+                            <div class="row">
+                              <div class="col-md-5" style="margin-left: 2.5rem;">
+                                <input type="text" class="form-control" placeholder="Name on card">
+                              </div>
+                              <div class="col-md-5">
+                                <input type="text" class="form-control" placeholder="Debit Card number">
+                              </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col">
+                                    <label class="form-label month-credit exp-label">Expiry Date: </label>
+                                </div>
+                                <div class="col">
+                                    <label class="form-label month-credit cvv-label">CVV: </label>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <select class="custom-select mr-sm-2 month-select" id="inlineFormCustomSelect">
+                                        <option selected>Month</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                      </select>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <select class="custom-select mr-sm-2 month-credit year-select" id="inlineFormCustomSelect">
+                                        <option selected>Year</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2025">2025</option>
+                                        <option value="2026">2026</option>
+                                        <option value="2027">2027</option>
+                                        <option value="2028">2028</option>
+                                        <option value="2029">2029</option>
+                                        <option value="2030">2030</option>
+                                        <option value="2031">2031</option>
+                                        <option value="2032">2032</option>
+                                      </select>
+                                </div>
+
+                                <div class="col-md-2 cvv-inp">
+                                    <input type="text" class="form-control" placeholder="CVV">
+                                </div>
+                            </div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                        <div class="form-inline upi-form">
+                            <label class="sr-only" for="inlineFormInputName2">UPI Name</label>
+                            <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="UPI app name">
+                          
+                            <label class="sr-only" for="inlineFormInputGroupUsername2">Username</label>
+                            <div class="input-group mb-2 mr-sm-2">
+                              <div class="input-group-prepend">
+                                <div class="input-group-text">@</div>
+                              </div>
+                              <input type="email" class="form-control" id="inlineFormInputGroupUsername2" placeholder="UPI ID">
+                            </div>
+                          
+                            <div class="form-check mb-2 mr-sm-2">
+                              <input class="form-check-input" type="checkbox" id="inlineFormCheck">
+                              <label class="form-check-label" style="margin-left:10px;" for="inlineFormCheck">
+                                Remember id
+                              </label>
+                            </div>
+                          
+                            <button type="button" style="margin-left:2rem;" class="btn btn-success mb-2">Pay</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <button name="bookbtn" type="submit" class="btn btn-lg book-btn"><i class="far fa-calendar-check"></i> Book</button>
             <input type="hidden" name="seatnumber" value="<%= seats %>"/>
             <input type="hidden" name="user_name" value="<%= user_name %>"/>
@@ -171,7 +333,6 @@
             <input type="hidden" name="user_id" value="<%= user_id %>"/>
         </form>
     </div>
-
 
     <!-- Footer -->
     <footer class="footer">

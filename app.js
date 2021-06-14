@@ -4,6 +4,7 @@ const ejs = require("ejs");
 const cors = require("cors");
 const app = express()
 const port = process.env.PORT || 5000
+const spawn = require('child_process').spawn;
 
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
@@ -15,30 +16,49 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.json());
 app.use(express.static("public"));
 
+// Heroku postgres Connection
 const { Client } = require('pg');
-const client = new Client({
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-      rejectUnauthorized: false
-    }
-  });
+// const client = new Client({
+//     connectionString: process.env.DATABASE_URL,
+//     ssl: {
+//       rejectUnauthorized: false
+//     }
+//   });
   
-  const { Pool } = require('pg');
-  const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-      rejectUnauthorized: false
-    }
-  });
+//   const { Pool } = require('pg');
+//   const pool = new Pool({
+//     connectionString: process.env.DATABASE_URL,
+//     ssl: {
+//       rejectUnauthorized: false
+//     }
+//   });
 
 //Localdb
-// var connectionString = "postgres://postgres:ganesh@localhost:5432/airline";
-// const client = new Client({
-//     connectionString: connectionString
-// });
+var connectionString = "postgres://postgres:ganesh@localhost:5432/airline";
+const client = new Client({
+    connectionString: connectionString
+});
 
 client.connect()
 
+// Flybot assisstant
+const pp = () => {
+    const pyprocess = spawn('python', ["flybotold.py"])
+    pyprocess.stdout.on('data', data => {
+        console.log(data.toString());
+    })
+    app.post("/stopbot", (req, res) => {
+        console.log("The process id was: ", pyprocess.pid);
+        process.kill(pyprocess.pid);
+        console.log("You have Stopped the bot");
+        res.redirect("/");
+    })
+}
+
+app.get("/flybot", (req, res) => {
+    res.render("flybot")
+    pp();
+})
 
 //* Admin Section
 app.get("/admin_login", (req, res) => {
@@ -60,7 +80,7 @@ app.post("/admin_login", (req, res) => {
                     console.log(user_id)
                     res.render("admin_section", {user_name: user_name, user_id: user_id});
                 } else {
-                    res.send("Invalid Username or Password");
+                    res.send("<h1>Invalid Username or Password</h1>");
                     console.log("Failure")
                 }
             });
@@ -500,7 +520,7 @@ app.post("/login", (req, res) => {
                     console.log(user_id)
                     res.render("search", {user_name: user_name, user_id: user_id}); 
                 } else {
-                    res.send("Invalid Username or Password");
+                    res.send("<h1>Invalid Username or Password</h1>");
                     console.log("Failure")
                 }
             });
@@ -547,21 +567,21 @@ app.post("/search", (req, res) => {
     var user_id = req.body.user_id;
 
     if(source === destination) {
-        res.send("<h1 style='text-align: center; font-size:3rem; margin-top:2rem;'>You have Selected Same source and destination!!!.<br>Please Change it<h1><br><br><h3 style='align-items:center; margin-left:8rem; font-size: 2rem;'>Note: If you get a message like Internal Server Error then you would have entered a wrong date..")
+        res.send("<h1 style='text-align: center; font-size:3rem; margin-top:2rem;'>You have Selected Same source and destination!!!.<br>Please Change it<h1><br><br><h3 style='align-items:center; margin-left:8rem; font-size: 2rem;'>")
+    } else {
+        console.log(req.body);
+        console.log(user_name);
+        client.query("SELECT * FROM airline.flights WHERE source = $1 AND destination = $2 AND date = $3", [source, destination, date],  function (error, results) {
+            if (results.rows == 0) {
+                res.send("<h1 style='text-align: center; font-size:3rem; margin-top:2rem;'>You have selected a Wrong Date!!<h1>")
+                res.render('error');
+            } else {
+                console.log(results.rows);
+                res.render('flights', {results: results.rows, user_name: user_name, user_id:user_id});
+            }
+                
+        });
     }
-
-    console.log(req.body);
-    console.log(user_name);
-    client.query("SELECT * FROM airline.flights WHERE source = $1 AND destination = $2 AND date = $3", [source, destination, date],  function (error, results) {
-        if (results.rows == 0) {
-            res.send("<h1 style='text-align: center; font-size:3rem; margin-top:2rem;'>You have Selected Same source and destination!!!.<br>Please Change it<h1><br><br><h3 style='align-items:center; margin-left:8rem; font-size: 2rem;'>Note: If you get a message like Internal Server Error then you would have entered a wrong date..")
-            res.render('error');
-        } else {
-            console.log(results.rows);
-            res.render('flights', {results: results.rows, user_name: user_name, user_id:user_id});
-        }
-            
-    });
 })
 
 
@@ -628,8 +648,6 @@ app.post("/seats", (req, res) => {
     }
 })
 
-
-
 app.post('/checkout', (req, res) => {
     const user_name = req.body.user_name;
     const passenger_id = req.body.user_id;
@@ -640,7 +658,8 @@ app.post('/checkout', (req, res) => {
     const email = req.body.email;
     const phone = req.body.phone;
     const payment_type = req.body.payment;
-
+    const act_fare = req.body.act_fare;
+    console.log("The fare in booking:", act_fare);
     var strsn = (req.body.seatnumber).split(',');
     console.log(strsn);
     if(strsn.length === 1) {
@@ -649,8 +668,9 @@ app.post('/checkout', (req, res) => {
             if(error) throw error;
         });
 
-        client.query("INSERT INTO airline.booking (passenger_id, flight_id, seat_no, name, age, email, phone, payment_type) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)", [passenger_id, flight_id, parseInt(strsn[0]), name, age, email, phone, payment_type] , function (error, results) {
+        client.query("INSERT INTO airline.booking (passenger_id, flight_id, seat_no, name, age, email, phone, payment_type, act_fare) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)", [passenger_id, flight_id, parseInt(strsn[0]), name, age, email, phone, payment_type, act_fare] , function (error, results) {
             if (error) {
+                console.log(error);
                 res.render('error')
             } else {
                 console.log(results.rows);
@@ -665,8 +685,9 @@ app.post('/checkout', (req, res) => {
                     res.render('error');
                 }
             });
-            client.query("INSERT INTO airline.booking (passenger_id, flight_id, seat_no, name, age, email, phone, payment_type) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)", [passenger_id, flight_id, parseInt(strsn[i]), name[i], age[i], email[i], phone[i], payment_type] , function (error, results) {
+            client.query("INSERT INTO airline.booking (passenger_id, flight_id, seat_no, name, age, email, phone, payment_type, act_fare) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)", [passenger_id, flight_id, parseInt(strsn[i]), name[i], age[i], email[i], phone[i], payment_type, parseInt(act_fare[i])] , function (error, results) {
                 if (error) {
+                    console.log(error);
                     res.render('error')
                 }
                 console.log(results.rows);
@@ -675,8 +696,56 @@ app.post('/checkout', (req, res) => {
         }
         res.render('success', {user_id: passenger_id, user_name: user_name});
     }
-    
 });
+
+// app.post('/checkout', (req, res) => {
+//     const user_name = req.body.user_name;
+//     const passenger_id = req.body.user_id;
+//     const flight_id = req.body.flight_id;
+    
+//     const name = req.body.name;
+//     const age = req.body.age;
+//     const email = req.body.email;
+//     const phone = req.body.phone;
+//     const payment_type = req.body.payment;
+
+//     var strsn = (req.body.seatnumber).split(',');
+//     console.log(strsn);
+//     if(strsn.length === 1) {
+//         const sq = "UPDATE airline.seats SET status = 'booked' WHERE seat_no = $1 AND flight_id = $2"
+//         client.query(sq, [parseInt(strsn[0]), flight_id], function (error, answers) {
+//             if(error) throw error;
+//         });
+
+//         client.query("INSERT INTO airline.booking (passenger_id, flight_id, seat_no, name, age, email, phone, payment_type) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)", [passenger_id, flight_id, parseInt(strsn[0]), name, age, email, phone, payment_type] , function (error, results) {
+//             if (error) {
+//                 console.log(error);
+//                 res.render('error')
+//             } else {
+//                 console.log(results.rows);
+//                 res.render('success', {user_id: passenger_id, user_name: user_name});
+//             }
+//         });
+//     } else {
+//         for (var i = 0; i < strsn.length; i++) {
+//             const sq2 = "UPDATE airline.seats SET status = 'booked' WHERE seat_no = $1 AND flight_id = $2"
+//             client.query(sq2, [parseInt(strsn[i]), flight_id], function (error, answers) {
+//                 if(error) {
+//                     res.render('error');
+//                 }
+//             });
+//             client.query("INSERT INTO airline.booking (passenger_id, flight_id, seat_no, name, age, email, phone, payment_type) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)", [passenger_id, flight_id, parseInt(strsn[i]), name[i], age[i], email[i], phone[i], payment_type] , function (error, results) {
+//                 if (error) {
+//                     console.log(error);
+//                     res.render('error')
+//                 }
+//                 console.log(results.rows);
+//             });
+            
+//         }
+//         res.render('success', {user_id: passenger_id, user_name: user_name});
+//     }
+// });
 
 
 app.get('/success', (req, res)=> {
@@ -686,7 +755,7 @@ app.get('/success', (req, res)=> {
 app.get('/bookings', (req, res)=> {
     var user_id = req.query.uid;
     var user_name = req.query.user;
-    const query = "SELECT b.booking_id, b.name, b.seat_no, b.name as user_name, b.age, b.email, b.phone, s.seat_type, s.class, s.fare, f.name, f.source, f.destination, f.date, f.dep_time, f.arr_time, b.payment_type FROM airline.booking b, airline.seats s, airline.flights f WHERE b.passenger_id = $1 AND b.flight_id = f.flight_id and b.seat_no = s.seat_no and b.flight_id = s.flight_id"
+    const query = "SELECT b.booking_id, b.name, b.seat_no, b.name as user_name, b.age, b.email, b.phone, b.disc_fare,s.seat_type, s.class, s.fare, f.name, f.source, f.destination, f.date, f.dep_time, f.arr_time, b.payment_type FROM airline.booking b, airline.seats s, airline.flights f WHERE b.passenger_id = $1 AND b.flight_id = f.flight_id and b.seat_no = s.seat_no and b.flight_id = s.flight_id"
     client.query(query, [user_id], function (error, results) {
         if (error) {
             res.render('error')
@@ -761,8 +830,6 @@ app.get("/contact", (req, res) => {
 //         })
 //     }
 // }, 43200000);
-
-
 
 app.listen(port, () => {
     console.log(`app listening at http://localhost:${port}`)

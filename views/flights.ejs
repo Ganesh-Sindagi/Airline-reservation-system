@@ -102,7 +102,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-3">
-                                <h5 id="flightname" data-toggle="tooltip" data-placement="top" title="Flight Name"><%= results[i].name %></h5>
+                                <h5 id="flightname" data-toggle="tooltip" data-placement="top" title="Flight Name" value="<%= results[i].name %>"><%= results[i].name %></h5>
                             </div>
                             <div class="col-md-5">
                                 <p id="duration" data-toggle="tooltip" data-placement="top" title="Duration"><%= results[i].duration %></p>
@@ -120,7 +120,7 @@
                                 <p id="fare" data-toggle="tooltip" data-placement="top" title="Fare"><i class="fas fa-rupee-sign"></i> <%= results[i].fare %></p>
                             </div>
                             <div class="col-md-2">
-                                <button name="bookbtn" value="<%= results[i].flight_id %>" type="submit" class="btn btn-lg book-btn"><i class="far fa-calendar-check"></i> Book</button>
+                                <button name="bookbtn" value="<%= results[i].flight_id %>" type="submit" class="btn btn-lg book-btn" id="<%= results[i].flight_id %>"><i class="far fa-calendar-check"></i> Book</button>
                             </div>
                         </div>
                     </div>
