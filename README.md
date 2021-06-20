@@ -4,6 +4,12 @@ Airline reservation system DBMS project. Using express, node, ejs, postgreSQL wi
 ## Deployed web app on heroku with heroku postgres
 https://flyeasy-airline.herokuapp.com/
 
+## This app uses
+```bash
+Platform as a service - heroku, Expressjs, nodejs, ejs, postgreSQL, bycrypt encryption, user authentication, 
+pythonbot to book tickets using voice commands, selenium, pyttsx3, speech_recognition
+```
+
 ## Report on the project
 https://github.com/Ganesh-Sindagi/Airline-reservation-system/blob/main/Ganesh%20Sindagi-DBMS-Mini_project-report.pdf
 
