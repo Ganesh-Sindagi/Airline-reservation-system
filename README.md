@@ -6,7 +6,7 @@ https://flyeasy-airline.herokuapp.com/
 
 ## This app uses
 ```bash
-Platform as a service - heroku, Expressjs, nodejs, ejs, postgreSQL, bycrypt encryption, user authentication, 
+Platform as a service - heroku, Expressjs, nodejs, ejs, postgreSQL, bycrypt encryption, authentication, 
 pythonbot to book tickets using voice commands, selenium, pyttsx3, speech_recognition
 ```
 
