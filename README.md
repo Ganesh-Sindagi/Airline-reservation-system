@@ -17,3 +17,7 @@ https://github.com/Ganesh-Sindagi/Airline-reservation-system/blob/main/Ganesh%20
 Click on the image to watch the full video.
 
 [![Watch the video](https://github.com/Ganesh-Sindagi/Airline-reservation-system/blob/main/APP%20DEMO/screencapture-localhost-5000-2020-12-31-09_19_16.png)](https://github.com/Ganesh-Sindagi/Airline-reservation-system/blob/main/APP%20DEMO/flybot-video.mp4)
+
+## Installation
+
+Clone the repository, open the Terminal or Command Prompt in the current directory and execute the following command.
