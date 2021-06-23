@@ -21,3 +21,7 @@ Click on the image to watch the full video.
 ## Installation
 
 Clone the repository, open the Terminal or Command Prompt in the current directory and execute the following command.
+
+```bash
+npm install
+```
