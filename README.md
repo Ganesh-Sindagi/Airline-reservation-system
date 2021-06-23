@@ -44,9 +44,6 @@ Run the server using following command.
 node app.js
 ```
 
-You must a MongoDB installed and run up the mongod server to establish a connection to the server.
-Use postman tool to make get, post, put and delete requests.
-
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
