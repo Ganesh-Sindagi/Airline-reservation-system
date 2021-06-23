@@ -25,3 +25,13 @@ Clone the repository, open the Terminal or Command Prompt in the current directo
 ```bash
 npm install
 ```
+## Usage
+
+Run the server using following command.
+
+```bash
+node app.js
+```
+
+You must a MongoDB installed and run up the mongod server to establish a connection to the server.
+Use postman tool to make get, post, put and delete requests.
